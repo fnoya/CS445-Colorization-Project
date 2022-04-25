@@ -15,8 +15,8 @@ import time
 import numpy as np
 from PIL import Image
 from pathlib import Path
-from tqdm.notebook import tqdm
-import matplotlib.pyplot as plt
+from tqdm import tqdm
+#import matplotlib.pyplot as plt
 from skimage.color import rgb2lab, lab2rgb
 
 import torch
@@ -31,7 +31,7 @@ from torchvision.models.resnet import resnet18
 from torchvision.models import vit_b_16 as visiontransformer
 from fastai.vision.models.unet import DynamicUnet
 
-import utils
+#import utils
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 use_colab = None
