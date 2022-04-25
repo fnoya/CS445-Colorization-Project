@@ -105,8 +105,8 @@ def make_dataloaders(batch_size=16, n_workers=4, pin_memory=True, **kwargs): # A
 # In[6]:
 
 
-train_dl = make_dataloaders(paths=train_paths, split='train')
-val_dl = make_dataloaders(paths=val_paths, split='val')
+train_dl = make_dataloaders(batch_size=8, n_workers=2, paths=train_paths, split='train')
+val_dl = make_dataloaders(batch_size=8, n_workers=2, paths=val_paths, split='val')
 
 data = next(iter(train_dl))
 Ls, abs_ = data['L'], data['ab']
@@ -387,6 +387,10 @@ def build_visiontransformer(n_output=900, size=256):
     torch.nn.init.xavier_uniform(net_d.heads.weight)
     return net_d
 
+def build_discriminator_res_unet(n_input=3, n_output=1, size=30):
+    body = create_body(resnet18, pretrained=True, n_in=n_input, cut=-2)
+    net_d = DynamicUnet(body, n_output, (size,size))
+    return net_d
 
 # In[15]:
 
