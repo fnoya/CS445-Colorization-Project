@@ -364,7 +364,7 @@ def train_model(model, train_dl, epochs, display_every=200, first_epoch=0):
                 print(f"Iteration {i}/{len(train_dl)}")
                 log_results(loss_meter_dict) # function to print out the losses
                 #visualize(model, data, save=False) # function displaying the model's outputs
-        torch.save(model.state_dict(), 'models/model2-' + str(e+1) +'.pt')
+        torch.save(model.state_dict(), 'models/model3-' + str(e+1) +'.pt')
 
 
 
@@ -439,6 +439,6 @@ net_G = build_res_unet(n_input=1, n_output=2, size=256)
 net_G.load_state_dict(torch.load("models/net_G_resnet18_model-19.pt", map_location=device))
 net_D = build_visiontransformer()
 model = MainModel(net_G=net_G, net_D=net_D)
-model.load_state_dict(torch.load('models/model2-2.pt'))
-train_model(model, train_dl, 20, first_epoch=2)
+#model.load_state_dict(torch.load('models/model2-2.pt'))
+train_model(model, train_dl, 20)
 torch.save(net_G.state_dict(), "models/colorization3-epoch20.pt")
