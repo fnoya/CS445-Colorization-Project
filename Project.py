@@ -7,7 +7,7 @@ import time
 import numpy as np
 from PIL import Image
 from pathlib import Path
-from tqdm.notebook import tqdm
+from tqdm import tqdm
 from skimage.color import rgb2lab, lab2rgb
 
 import torch
@@ -362,7 +362,7 @@ def train_model(model, train_dl, epochs, display_every=200, first_epoch=0):
                 print(f"Iteration {i}/{len(train_dl)}")
                 log_results(loss_meter_dict) # function to print out the losses
                 #visualize(model, data, save=False) # function displaying the model's outputs
-        torch.save(model.state_dict(), 'models/model4-ViT-' + str(e+1) +'.pt')
+        torch.save(model.state_dict(), 'models/model4-1channel-ViT-' + str(e+1) +'.pt')
 
 
 
