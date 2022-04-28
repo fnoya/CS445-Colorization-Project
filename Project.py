@@ -362,7 +362,10 @@ def train_model(model, train_dl, epochs, display_every=200, first_epoch=0):
                 print(f"Iteration {i}/{len(train_dl)}")
                 log_results(loss_meter_dict) # function to print out the losses
                 #visualize(model, data, save=False) # function displaying the model's outputs
-        torch.save(model.state_dict(), 'models/model4-1channel-ViT-' + str(e+1) +'.pt')
+        torch.save(model.state_dict(), 'models/model4-1channel-ViT.pt')
+        file_object = open('epochs.txt', 'a')
+        file_object.write(str(e)+"\n")
+        file_object.close()
 
 
 
@@ -459,6 +462,9 @@ def pretrain_generator(net_G, train_dl, opt, criterion, epochs):
 
 # In[ ]:
 
+file_object = open('epochs.txt', 'a')
+file_object.write("Start\n")
+file_object.close()
 
 net_G = build_VTi_generator()
 model = MainModel(net_G = net_G, use_ViT_gen=True)
