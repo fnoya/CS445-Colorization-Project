@@ -193,7 +193,7 @@ def init_model(model, device):
 
 class MainModel(nn.Module):
     def __init__(self, net_G=None, net_D=None, use_ViT_gen = False, lr_G=2e-4, lr_D=2e-4, 
-                 beta1=0.5, beta2=0.999, lambda_L1=100.):
+                 beta1=0.5, beta2=0.999, lambda_L1=50.):
         super().__init__()
         
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -225,7 +225,7 @@ class MainModel(nn.Module):
         
     def forward(self):
         if (self.use_ViT_gen == True):
-            outputs = self.net_G(self.L.repeat(1,3,1,1))
+            outputs = self.net_G(self.L)#.repeat(1,3,1,1))
             self.fake_color = outputs.logits
         else:
             self.fake_color = self.net_G(self.L)
@@ -392,11 +392,13 @@ def build_visiontransformer(n_output=900, size=256):
 # Build transformer based generator
 # https://huggingface.co/docs/transformers/model_doc/vit
 
-from transformers import ViTForMaskedImageModeling
+from transformers import ViTForMaskedImageModeling, ViTConfig
 
 def build_VTi_generator():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = ViTForMaskedImageModeling.from_pretrained("google/vit-base-patch16-224-in21k")
+    #model = ViTForMaskedImageModeling.from_pretrained("google/vit-base-patch16-224-in21k")
+	config = ViTConfig(num_channels=1)
+    model = ViTForMaskedImageModeling(config)
     model.decoder = nn.Sequential(nn.Conv2d(768, 512, kernel_size=(1, 1), stride=(1, 1)), nn.PixelShuffle(upscale_factor=16))
     model = model.to(device)
     return model
@@ -460,6 +462,6 @@ def pretrain_generator(net_G, train_dl, opt, criterion, epochs):
 
 net_G = build_VTi_generator()
 model = MainModel(net_G = net_G, use_ViT_gen=True)
-train_model(model, train_dl, 20)
+train_model(model, train_dl, 50)
 torch.save(net_G.state_dict(), "models/colorization4-ViT-epoch20.pt")
 
