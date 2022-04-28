@@ -397,7 +397,7 @@ from transformers import ViTForMaskedImageModeling, ViTConfig
 def build_VTi_generator():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     #model = ViTForMaskedImageModeling.from_pretrained("google/vit-base-patch16-224-in21k")
-	config = ViTConfig(num_channels=1)
+    config = ViTConfig(num_channels=1)
     model = ViTForMaskedImageModeling(config)
     model.decoder = nn.Sequential(nn.Conv2d(768, 512, kernel_size=(1, 1), stride=(1, 1)), nn.PixelShuffle(upscale_factor=16))
     model = model.to(device)
