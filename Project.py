@@ -1,22 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-
-
-#get_ipython().system('pip install fastai')
-
-
-# In[2]:
-
-
 import os
 import glob
 import time
 import numpy as np
 from PIL import Image
 from pathlib import Path
-from tqdm import tqdm
-#import matplotlib.pyplot as plt
+from tqdm.notebook import tqdm
 from skimage.color import rgb2lab, lab2rgb
 
 import torch
@@ -31,14 +22,14 @@ from torchvision.models.resnet import resnet18
 from torchvision.models import vit_b_16 as visiontransformer
 from fastai.vision.models.unet import DynamicUnet
 
-#import utils
+import utils
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 use_colab = None
 print (device)
 
 
-# In[3]:
+# In[190]:
 
 
 from fastai.data.external import untar_data, URLs
@@ -46,11 +37,10 @@ coco_path = untar_data(URLs.COCO_SAMPLE)
 coco_path = str(coco_path) + "/train_sample"
 
 
-# In[4]:
+# In[191]:
 
 
 path = coco_path
-print (path)
     
 paths = glob.glob(path + "/*.jpg") # Grabbing all the image file names
 np.random.seed(123)
@@ -62,10 +52,12 @@ train_paths = paths_subset[train_idxs]
 val_paths = paths_subset[val_idxs]
 print(len(train_paths), len(val_paths))
 
-# In[5]:
 
 
-SIZE = 256
+# In[422]:
+
+
+SIZE = 224
 class ColorizationDataset(Dataset):
     def __init__(self, paths, split='train'):
         if split == 'train':
@@ -86,6 +78,7 @@ class ColorizationDataset(Dataset):
         img = np.array(img)
         img_lab = rgb2lab(img).astype("float32") # Converting RGB to L*a*b
         img_lab = transforms.ToTensor()(img_lab)
+        #L = img_lab[[0], ...].type(torch.uint8) # / 50. - 1. # Between -1 and 1
         L = img_lab[[0], ...] / 50. - 1. # Between -1 and 1
         ab = img_lab[[1, 2], ...] / 110. # Between -1 and 1
         
@@ -95,18 +88,18 @@ class ColorizationDataset(Dataset):
         return len(self.paths)
 
 ##### WINDOWS n_workers should be 0, otherwise 4
-def make_dataloaders(batch_size=16, n_workers=4, pin_memory=True, **kwargs): # A handy function to make our dataloaders
+def make_dataloaders(batch_size=16, n_workers=2, pin_memory=True, **kwargs): # A handy function to make our dataloaders
     dataset = ColorizationDataset(**kwargs)
     dataloader = DataLoader(dataset, batch_size=batch_size, num_workers=n_workers,
                             pin_memory=pin_memory)
     return dataloader
 
 
-# In[6]:
+# In[423]:
 
 
-train_dl = make_dataloaders(batch_size=8, n_workers=2, paths=train_paths, split='train')
-val_dl = make_dataloaders(batch_size=8, n_workers=2, paths=val_paths, split='val')
+train_dl = make_dataloaders(paths=train_paths, split='train')
+val_dl = make_dataloaders(paths=val_paths, split='val')
 
 data = next(iter(train_dl))
 Ls, abs_ = data['L'], data['ab']
@@ -114,7 +107,7 @@ print(Ls.shape, abs_.shape)
 print(len(train_dl), len(val_dl))
 
 
-# In[7]:
+# In[424]:
 
 
 class PatchDiscriminator(nn.Module):
@@ -138,7 +131,7 @@ class PatchDiscriminator(nn.Module):
         return self.model(x)
 
 
-# In[8]:
+# In[487]:
 
 
 class GANLoss(nn.Module):
@@ -160,11 +153,11 @@ class GANLoss(nn.Module):
     
     def __call__(self, preds, target_is_real):
         labels = self.get_labels(preds, target_is_real)
-        loss = self.loss(preds, labels)
+        loss = self.loss(preds, labels) 
         return loss
 
 
-# In[9]:
+# In[488]:
 
 
 def init_weights(net, init='norm', gain=0.02):
@@ -195,16 +188,17 @@ def init_model(model, device):
     return model
 
 
-# In[10]:
+# In[514]:
 
 
 class MainModel(nn.Module):
-    def __init__(self, net_G=None, net_D=None, lr_G=2e-4, lr_D=2e-4, 
+    def __init__(self, net_G=None, net_D=None, use_ViT_gen = False, lr_G=2e-4, lr_D=2e-4, 
                  beta1=0.5, beta2=0.999, lambda_L1=100.):
         super().__init__()
         
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.lambda_L1 = lambda_L1
+        self.use_ViT_gen = use_ViT_gen
         
         if net_G is None:
             raise NotImplementedError
@@ -230,7 +224,11 @@ class MainModel(nn.Module):
         self.ab = data['ab'].to(self.device)
         
     def forward(self):
-        self.fake_color = self.net_G(self.L)
+        if (self.use_ViT_gen == True):
+            outputs = self.net_G(self.L.repeat(1,3,1,1))
+            self.fake_color = outputs.logits
+        else:
+            self.fake_color = self.net_G(self.L)
     
     def backward_D(self):
         fake_image = torch.cat([self.L, self.fake_color], dim=1)
@@ -265,7 +263,7 @@ class MainModel(nn.Module):
         self.opt_G.step()
 
 
-# In[11]:
+# In[515]:
 
 
 class AverageMeter:
@@ -346,7 +344,7 @@ def log_results(loss_meter_dict):
         print(f"{loss_name}: {loss_meter.avg:.5f}")
 
 
-# In[12]:
+# In[ ]:
 
 
 def train_model(model, train_dl, epochs, display_every=200, first_epoch=0):
@@ -364,11 +362,11 @@ def train_model(model, train_dl, epochs, display_every=200, first_epoch=0):
                 print(f"Iteration {i}/{len(train_dl)}")
                 log_results(loss_meter_dict) # function to print out the losses
                 #visualize(model, data, save=False) # function displaying the model's outputs
-        torch.save(model.state_dict(), 'models/model3-' + str(e+1) +'.pt')
+        torch.save(model.state_dict(), 'models/model4-ViT-' + str(e+1) +'.pt')
 
 
 
-# In[13]:
+# In[517]:
 
 
 def build_res_unet(n_input=1, n_output=2, size=256):
@@ -378,7 +376,7 @@ def build_res_unet(n_input=1, n_output=2, size=256):
     return net_G
 
 
-# In[14]:
+# In[518]:
 
 
 def build_visiontransformer(n_output=900, size=256):
@@ -387,12 +385,25 @@ def build_visiontransformer(n_output=900, size=256):
     torch.nn.init.xavier_uniform(net_d.heads.weight)
     return net_d
 
-def build_discriminator_res_unet(n_input=3, n_output=1, size=30):
-    body = create_body(resnet18, pretrained=True, n_in=n_input, cut=-2)
-    net_d = DynamicUnet(body, n_output, (size,size))
-    return net_d
 
-# In[15]:
+# In[519]:
+
+
+# Build transformer based generator
+# https://huggingface.co/docs/transformers/model_doc/vit
+
+from transformers import ViTForMaskedImageModeling
+
+def build_VTi_generator():
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model = ViTForMaskedImageModeling.from_pretrained("google/vit-base-patch16-224-in21k")
+    model.decoder = nn.Sequential(nn.Conv2d(768, 512, kernel_size=(1, 1), stride=(1, 1)), nn.PixelShuffle(upscale_factor=16))
+    model = model.to(device)
+    return model
+    
+
+
+# In[520]:
 
 
 def pretrain_generator(net_G, train_dl, opt, criterion, epochs):
@@ -413,7 +424,7 @@ def pretrain_generator(net_G, train_dl, opt, criterion, epochs):
         #torch.save(net_G.state_dict(), 'models/net_G_resnet18_model-' + str(e) +'.pt')
 
 
-# In[16]:
+# In[521]:
 
 
 #model = MainModel()
@@ -422,7 +433,7 @@ def pretrain_generator(net_G, train_dl, opt, criterion, epochs):
 #train_model(model, train_dl, 100, first_epoch=0)
 
 
-# In[17]:
+# In[522]:
 
 
 #net_G = build_res_unet(n_input=1, n_output=2, size=256)
@@ -435,10 +446,20 @@ def pretrain_generator(net_G, train_dl, opt, criterion, epochs):
 # In[ ]:
 
 
-net_G = build_res_unet(n_input=1, n_output=2, size=256)
-net_G.load_state_dict(torch.load("models/net_G_resnet18_model-19.pt", map_location=device))
-net_D = build_visiontransformer()
-model = MainModel(net_G=net_G, net_D=net_D)
-#model.load_state_dict(torch.load('models/model2-2.pt'))
+#net_G = build_res_unet(n_input=1, n_output=2, size=256)
+#net_G.load_state_dict(torch.load("models/net_G_resnet18_model-19.pt", map_location=device))
+#net_D = build_visiontransformer()
+#model = MainModel(net_G=net_G, net_D=net_D)
+#model.load_state_dict(torch.load('models/model2-1.pt'))
+#train_model(model, train_dl, 20, first_epoch=1)
+#torch.save(net_G.state_dict(), "models/colorization3-epoch20.pt")
+
+
+# In[ ]:
+
+
+net_G = build_VTi_generator()
+model = MainModel(net_G = net_G, use_ViT_gen=True)
 train_model(model, train_dl, 20)
-torch.save(net_G.state_dict(), "models/colorization3-epoch20.pt")
+torch.save(net_G.state_dict(), "models/colorization4-ViT-epoch20.pt")
+
