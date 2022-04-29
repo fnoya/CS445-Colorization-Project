@@ -225,7 +225,7 @@ class MainModel(nn.Module):
         
     def forward(self):
         if (self.use_ViT_gen == True):
-            outputs = self.net_G(self.L)#.repeat(1,3,1,1))
+            outputs = self.net_G(self.L.repeat(1,3,1,1))
             self.fake_color = outputs.logits
         else:
             self.fake_color = self.net_G(self.L)
@@ -362,7 +362,7 @@ def train_model(model, train_dl, epochs, display_every=200, first_epoch=0):
                 print(f"Iteration {i}/{len(train_dl)}")
                 log_results(loss_meter_dict) # function to print out the losses
                 #visualize(model, data, save=False) # function displaying the model's outputs
-        torch.save(model.state_dict(), 'models/model4-1channel-ViT.pt')
+        torch.save(model.state_dict(), 'models/model4-3channel-ViT.pt')
         file_object = open('epochs.txt', 'a')
         file_object.write(str(e)+"\n")
         file_object.close()
@@ -399,10 +399,16 @@ from transformers import ViTForMaskedImageModeling, ViTConfig
 
 def build_VTi_generator():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    #model = ViTForMaskedImageModeling.from_pretrained("google/vit-base-patch16-224-in21k")
-    config = ViTConfig(num_channels=1)
-    model = ViTForMaskedImageModeling(config)
-    model.decoder = nn.Sequential(nn.Conv2d(768, 512, kernel_size=(1, 1), stride=(1, 1)), nn.PixelShuffle(upscale_factor=16))
+    model = ViTForMaskedImageModeling.from_pretrained("google/vit-base-patch16-224-in21k")
+#    config = ViTConfig(num_channels=1)
+#    model = ViTForMaskedImageModeling(config)
+#    model.decoder = nn.Sequential(nn.Conv2d(768, 512, kernel_size=(1, 1), stride=(1, 1)), nn.PixelShuffle(upscale_factor=16))   ## version 1 channel
+    model.decoder = nn.Sequential(nn.Conv2d(768, 768, kernel_size=3, stride=1, padding=1), \
+                                    nn.ReLU(inplace=True),
+                                    nn.Conv2d(768, 768, kernel_size=3, stride=1, padding=1), \
+                                    nn.ReLU(inplace=True),
+                                    nn.Conv2d(768, 512, kernel_size=3, stride=1, padding=1), \
+                                    nn.PixelShuffle(upscale_factor=16))
     model = model.to(device)
     return model
     
@@ -468,6 +474,6 @@ file_object.close()
 
 net_G = build_VTi_generator()
 model = MainModel(net_G = net_G, use_ViT_gen=True)
-train_model(model, train_dl, 50)
+train_model(model, train_dl, 10)
 torch.save(net_G.state_dict(), "models/colorization4-ViT-epoch20.pt")
 
