@@ -473,7 +473,11 @@ file_object.write("Start\n")
 file_object.close()
 
 net_G = build_VTi_generator()
+opt = optim.Adam(net_G.parameters(), lr=1e-4)
+criterion = nn.L1Loss()        
+pretrain_generator(net_G, train_dl, opt, criterion, 20)
+torch.save(net_G.state_dict(), "models/net_G_ViT-20-pretraining.pt")
 model = MainModel(net_G = net_G, use_ViT_gen=True)
-train_model(model, train_dl, 10)
-torch.save(net_G.state_dict(), "models/colorization4-ViT-epoch20.pt")
+train_model(model, train_dl, 20)
+torch.save(net_G.state_dict(), "models/colorization5-ViT-epoch20.pt")
 
