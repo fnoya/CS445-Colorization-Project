@@ -422,7 +422,8 @@ def pretrain_generator(net_G, train_dl, opt, criterion, epochs):
         loss_meter = AverageMeter()
         for data in tqdm(train_dl):
             L, ab = data['L'].to(device), data['ab'].to(device)
-            preds = net_G(L)
+            preds = net_G(L.repeat(1,3,1,1))
+			preds = preds.logits
             loss = criterion(preds, ab)
             opt.zero_grad()
             loss.backward()
