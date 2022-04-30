@@ -193,7 +193,7 @@ def init_model(model, device):
 
 class MainModel(nn.Module):
     def __init__(self, net_G=None, net_D=None, use_ViT_gen = False, lr_G=2e-4, lr_D=2e-4, 
-                 beta1=0.5, beta2=0.999, lambda_L1=50.):
+                 beta1=0.5, beta2=0.999, lambda_L1=100.):
         super().__init__()
         
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -210,7 +210,7 @@ class MainModel(nn.Module):
         else:
             self.net_D = net_D.to(self.device)
             
-        self.GANcriterion = GANLoss(gan_mode='vanilla').to(self.device)
+        self.GANcriterion = GANLoss(gan_mode='lsgan').to(self.device)
         self.L1criterion = nn.L1Loss()
         self.opt_G = optim.Adam(self.net_G.parameters(), lr=lr_G, betas=(beta1, beta2))
         self.opt_D = optim.Adam(self.net_D.parameters(), lr=lr_D, betas=(beta1, beta2))
@@ -362,7 +362,7 @@ def train_model(model, train_dl, epochs, display_every=200, first_epoch=0):
                 print(f"Iteration {i}/{len(train_dl)}")
                 log_results(loss_meter_dict) # function to print out the losses
                 #visualize(model, data, save=False) # function displaying the model's outputs
-        torch.save(model.state_dict(), 'models/model4-3channel-ViT.pt')
+        torch.save(model.state_dict(), 'models/model6-3channel-ViT.pt')
         file_object = open('epochs.txt', 'a')
         file_object.write(str(e)+"\n")
         file_object.close()
@@ -476,9 +476,10 @@ file_object.close()
 net_G = build_VTi_generator()
 opt = optim.Adam(net_G.parameters(), lr=1e-4)
 criterion = nn.L1Loss()        
-pretrain_generator(net_G, train_dl, opt, criterion, 20)
-torch.save(net_G.state_dict(), "models/net_G_ViT-20-pretraining.pt")
+#pretrain_generator(net_G, train_dl, opt, criterion, 20)
+#torch.save(net_G.state_dict(), "models/net_G_ViT-20-pretraining.pt")
+net_G.load_state_dict(torch.load("models/net_G_ViT-20-pretraining.pt", map_location=device))
 model = MainModel(net_G = net_G, use_ViT_gen=True)
 train_model(model, train_dl, 20)
-torch.save(net_G.state_dict(), "models/colorization5-ViT-epoch20.pt")
+torch.save(net_G.state_dict(), "models/colorization6-ViT-epoch20.pt")
 
