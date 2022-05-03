@@ -8,6 +8,7 @@ __pycache__/
 *.log
 *.gz
 Project.md
+sigkddExp.*
 *.html
 
 # C extensions
