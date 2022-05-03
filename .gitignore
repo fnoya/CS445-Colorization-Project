@@ -6,6 +6,8 @@ __pycache__/
 *.JPG
 *.jpg
 *.tex
+*.log
+*.gz
 Project.md
 *.html
 
@@ -136,3 +138,9 @@ dmypy.json
 
 images/
 models/
+Project_files/
+portraits/
+oldimages/
+results/images*/
+results/oldimages*/
+results/portraits/
