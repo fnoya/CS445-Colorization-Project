@@ -5,7 +5,6 @@ __pycache__/
 *.pt
 *.JPG
 *.jpg
-*.tex
 *.log
 *.gz
 Project.md
