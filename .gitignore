@@ -5,8 +5,10 @@ __pycache__/
 *.pt
 *.JPG
 *.jpg
-*.tex
+*.log
+*.gz
 Project.md
+sigkddExp.*
 *.html
 
 # C extensions
@@ -136,3 +138,9 @@ dmypy.json
 
 images/
 models/
+Project_files/
+portraits/
+oldimages/
+results/images*/
+results/oldimages*/
+results/portraits/
