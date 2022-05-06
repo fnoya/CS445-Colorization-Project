@@ -6,9 +6,8 @@
 
 In this project we implemented a tool to selectively and automatically colorize the foreground of black and white photographs.  The tool consists of two main algorithms.  First,  a ViT-LSGAN network colorizes the entire photograph.  Second, a segmentation network segments the foreground from the background.  Lastly, colorized foreground is blended with the original background to produce a distinctive image.
 
-# Colorization Network
+# Approach for the Colorization Network
 
-## Approach
 For the colorization task we worked on the __Lab__ colorspace.  In this space, the __L__ channel contains the luminance or intensity information, while the __ab__ channels contain the color information.  Therefore, a neural network can be trained with the __L__ channel of regular color images as input. Its predictions will be "fake" __ab__ channels and its loss will be calculated with the "real" __ab__ channels.
 
 After a short bibliographic review we found that although traditional convolutional neural networks (CNNs) could produce results almost indistinguishable from real color photos [@ZhangIE16], _Generative Adversarial Networks_ or GANs [@goodfellow2014] were the most proper approach for this kind of problem.  This network architecture contains two modules, a Generator and a Discriminator.  Both models are trained in paralell.  The objective of the generator is to produce outputs similar enough to the ground truth that can fool the discriminator.  The discriminator's objective is to properly tell the ground truth from the discriminator output.
@@ -22,6 +21,9 @@ In order to try different approaches, we decided to use _Transformers_ in place 
 
 For training and validation purposes we used a subset of the COCO dataset of images [@cocodataset] that is provided by the FastAI framework [@fastai]. We downloaded 10.000 images from this dataset and randomly splited them into two sets: a training set with 8.000 images and a validation set with 2.000 images.  Then we resized the images so that they have manageable dimensions that allow feeding into the different network architectures without requiring extremely high computational resources or long times.  Similar to [@pix2pix] data augmentation was achieved by flipping the images horizontally (this is only done for the training set).  We used 16 images on each batch that goes through the network.  Each image was converted to the __Lab__ colorspace and the channels adjusted float values between -1 and 1. 
     
+## Model improvement
+
+Our initial model was a variation of the original _pix2pix_ GAN in which the generator was replaced by a pre-trained _ResNet18_ _UNet_.  We then experimented with different visual transfomers as discriminators and generators.  Our final model, named __ViT-LSGAN__, uses a ViT as the generator and least squared errors instead of cross entropy as the loss function of the discriminator.  The details of all the intermediate steps and models that we trained and tested can be found in __"Supplemental Materials"__.
 
 ## Loss functions
 
@@ -29,7 +31,7 @@ The loss function of the discriminator for each image is the binary cross entrop
 
 ## Model Training, Transfer and Validation
 
-All the training was done on a machine equipped with an NVIDIA K80 GPU, 4 vCPUs and 61 MB of RAM (_AWS EC2 p2.xlarge_ instance).  The transfer learning, validation and metrics calculation were done in an Intel i5 CPU with 8 MB of RAM. 
+For implementing these models we work in Python and Jupyter Notebooks making extensive use of PyTorch and NumPy libraries.  All the training was done on a machine equipped with an NVIDIA K80 GPU, 4 vCPUs and 61 MB of RAM (_AWS EC2 p2.xlarge_ instance).  The transfer learning, validation and metrics calculation were done in an Intel i5 CPU with 8 MB of RAM. 
 For validation we used 2000 images from the __COCO__ dataset that were not used for training, and a set of 70 photographs that were taken by the authors.  To assess the different networks architectures we selected a set of metrics for regression models:
 
 * Correlation coeficient _R_ squared
@@ -40,6 +42,36 @@ For validation we used 2000 images from the __COCO__ dataset that were not used 
 
 We calculated all these metrics for each one of the __ab__ channels.
 
+
+# Results
+
+## Validation of colorization models
+
+![Samples of results from using a ResNet18 network as the generator. Top row: inputs, Middle row: predictions, Bottom row: ground truth.](results/ResNet18.png) 
+
+\begin{table}\centering\caption[Metrics of ResNet18 generator on validation dataset]{ResNet18 metrics on validation dataset}\begin{tabular}{llll}\toprule{}                 Metric &              a-channel &             b-channel \\\midrule                R-square &     0.9762 &    0.7944 \\     Explained variance &     0.9763 &    0.8047 \\    Mean absolute error &   0.0221 &   0.0813 \\  Median absolute error &   0.0115 &  0.0533 \\     Mean squared error &  0.0016 &  0.0144 \\            Sample size &                   2000 &                  2000 \\\bottomrule\end{tabular}\end{table}
+
+
+The results of the model with the ResNet18 generator were acceptable.  However, many times they do not look natural because of an excessive use of colors by the generator that resulted in colorful blotches in the pictures.  In agreement with the visual inspection, the resulting metrics on the validation dataset showed that the network did a pretty good job at predicting the __a__-channel with over 97% of the variance of the channel predicted by the model with a very low mean squared error.  However, the prediction on the __b__-channel was not as good with the model predicting only 80% of its variance.
+
+![Samples of results ViT-LSGAN model. Top row: inputs, Middle row: predictions, Bottom row: ground truth.](results/FINAL_ViT_generator.png)
+
+![COCO images from the validation set colorized with the final ViT-LSGAN model. Top row: inputs, Middle row: predictions, Bottom row: ground truth.](Project_files/Project_62_1.png)
+
+\begin{table}\centering\caption[Metrics of the ViT-LSGAN model on validation dataset]{ViT metrics on validation dataset}\begin{tabular}{llll}\toprule{}                 Metric &              a-channel &             b-channel \\\midrule               R-square &      0.9856 &     0.8596 \\     Explained variance &     0.9859 &    0.8620 \\    Mean absolute error &   0.0157 &   0.0625 \\Median absolute error &   0.0075 &   0.0374 \\Mean squared error &  0.0010 &  0.0095 \\Sample size &                   2000 &                  2000 \\\bottomrule\end{tabular}\end{table}
+
+The metrics from ViT-LSGAN model were very encouraging.  By using visual transformers we got an improvement over the initial UNet based model on every metric in particular in the __b__-channel which was the most difficult to predict.  For example, this model was able to explain 98% of the variance of the __a__-channel and 86% of the variance of the __b__-channel, against 97% and 80%, respectively, when using the UNet model.
+
+## Final colorization results
+
+We tested our ViT-LSGAN with historic black and white urban pictures as well as with historic portraits.  We noticed that sometimes old photographs are saturated, particularly, in the sky area.  This causes the LSGAN to interpret them as cloudy skies and producing a white sky.  This effect can be partially overcome by adjusting the gain of the original photo before feeding it into the network.  
+
+![Historic photos of Montevideo.](Project_files/Project_72_0.png)
+
+![Historic portraits.](Project_files/Project_73_0.png)
+
+# Supplemental Materials for Colorization Network
+## Model class
 
 ```python
 class MainModel(nn.Module):
@@ -115,18 +147,10 @@ class MainModel(nn.Module):
         self.opt_G.step()
 ```
 
-
 ## First approach: _ResNet18_ generator
 
 On out first approach we employed a generator based on the ResNet18 network. One of the challenges of GANs is that, at the beginning of the training, the task of the discriminator is much easier than that of the generator because the generated outputs are very different from the real ones.  In this situation, the discriminator learns so much faster and gives no time to the generator to adapt.  To avoid this, we gave the generator a _head start_ by training it alone (without the generator) for 20 epochs with a L1 loss function and saving its weights.  After that we started the parallel training of the generator and the patch discriminator for another 20 epochs.
 
-
-![Samples of results from using a ResNet18 network as the generator. Top row: inputs, Middle row: predictions, Bottom row: ground truth.](results/ResNet18.png) 
-
-\begin{table}\centering\caption[Metrics of ResNet18 generator on validation dataset]{ResNet18 metrics on validation dataset}\begin{tabular}{llll}\toprule{}                 Metric &              a-channel &             b-channel \\\midrule                R-square &     0.9762 &    0.7944 \\     Explained variance &     0.9763 &    0.8047 \\    Mean absolute error &   0.0221 &   0.0813 \\  Median absolute error &   0.0115 &  0.0533 \\     Mean squared error &  0.0016 &  0.0144 \\            Sample size &                   2000 &                  2000 \\\bottomrule\end{tabular}\end{table}
-
-
-The results of the model with the ResNet18 generator were acceptable.  However, many times they do not look natural because of an excessive use of colors by the generator that resulted in colorful blotches in the pictures.  In agreement with the visual inspection, the resulting metrics on the validation dataset showed that the network did a pretty good job at predicting the __a__-channel with over 97% of the variance of the channel predicted by the model with a very low mean squared error.  However, the prediction on the __b__-channel was not as good with the model predicting only 80% of its variance.
 
 ## Second approach: ViT as discriminator
 
@@ -176,27 +200,11 @@ The other main challenge of training a GAN is choosing the right loss function. 
 
 The loss function is what gives the gradient the generator needs to learn to fool the discriminator and not all loss functions are equal for this task.  As already mentioned, at the beginning of the training it is very easy for the discriminator to tell fake from real.  When Cross Entropy is used, it can provide very low or vanishing gradients at the start of the training that do not help the improvement of the generator.  To overcome this problem, it has been suggested the use of least squared errors loss functions [@LSGAN]. Therefore, we replaced the BCE loss with least square errors loss to construct a __ViT-LSGAN__.
 
-![Samples of results ViT-LSGAN model. Top row: inputs, Middle row: predictions, Bottom row: ground truth.](results/FINAL_ViT_generator.png)
-
-
-\begin{table}\centering\caption[Metrics of the ViT-LSGAN model on validation dataset]{ViT metrics on validation dataset}\begin{tabular}{llll}\toprule{}                 Metric &              a-channel &             b-channel \\\midrule               R-square &      0.9856 &     0.8596 \\     Explained variance &     0.9859 &    0.8620 \\    Mean absolute error &   0.0157 &   0.0625 \\Median absolute error &   0.0075 &   0.0374 \\Mean squared error &  0.0010 &  0.0095 \\Sample size &                   2000 &                  2000 \\\bottomrule\end{tabular}\end{table}
-
-The metrics from ViT-LSGAN model were very encouraging.  By using visual transformers we got an improvement over the initial UNet based model on every metric in particular in the __b__-channel which was the most difficult to predict.  For example, this model was able to explain 98% of the variance of the __a__-channel and 86% of the variance of the __b__-channel, against 97% and 80%, respectively, when using the UNet model.
 
 ## Image Upscaling
 
 The ViT-LSGAN was trained with 224 by 224 images, so it is better to use downsampled images for transfering color.  To colorize the full size image, we upscaled the outputs of the network by resizing the predicted __ab__ channels to the size of the original __L__ channel, and combined the results with the __L__ channel to produce a color image in the __Lab__ colorspace.
 
-
-## Final colorization results
-
-We tested our ViT-LSGAN with historic black and white urban pictures as well as with historic portraits.  We noticed that sometimes old photographs are saturated, particularly, in the sky area.  This causes the LSGAN to interpret them as cloudy skies and producing a white sky.  This effect can be partially overcome by adjusting the gain of the original photo before feeding it into the network.
-    
-![Historic photos of Montevideo.](Project_files/Project_72_0.png)
-    
-![Historic portraits.](Project_files/Project_73_0.png)
     
 
 # References
-
-
