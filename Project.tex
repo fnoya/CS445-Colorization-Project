@@ -4,7 +4,9 @@
 %
 \documentclass[
 ]{article}
+\usepackage[preprint]{neurips_2020}
 \usepackage{booktabs}
+\usepackage{fvextra}
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -37,9 +39,6 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={Selective Coloring},
-  pdfauthor={Francisco Noya (fnoya2@illinois.edu); Mesay Taye (mesayst2@illinois.edu)},
-  pdfkeywords={Colorization, Segmentation},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
@@ -47,43 +46,40 @@
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
 \newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\usepackage{fvextra}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=\scriptsize,commandchars=\\\{\}}
 % Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
 \newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -129,28 +125,24 @@
 \fi
 
 \title{Selective Coloring}
-\author{Francisco Noya (fnoya2@illinois.edu) \and Mesay Taye
-(mesayst2@illinois.edu)}
-\date{2022-05-01}
+\author{Francisco Noya\\ \texttt{fnoya2@illinois.edu}\\
+\And Mesay Taye\\ \texttt{mesayst2@illinois.edu} \\
+}
+\date{2022-05-06}
 
 \begin{document}
 \maketitle
 
 In this project we implemented a tool to selectively and automatically
 colorize the foreground of black and white photographs. The tool
-consists of two main algorithms. First, a GAN network colorizes the
-entire photograph using transfer learning. Second, a segmentation
-network segments the foreground from the background. Lastly, it blends
-the colorized foreground with the original background to produce a
-distinctive image.
+consists of two main algorithms. First, a ViT-LSGAN network colorizes
+the entire photograph. Second, a segmentation network segments the
+foreground from the background. Lastly, colorized foreground is blended
+with the original background to produce a distinctive image.
 
-In this notebook the Colorization network is trained and validated.
-
-\hypertarget{colorization-network}{%
-\subsection{Colorization Network}\label{colorization-network}}
-
-\hypertarget{approach}{%
-\subsubsection{Approach}\label{approach}}
+\hypertarget{approach-for-the-colorization-network}{%
+\section{Approach for the Colorization
+Network}\label{approach-for-the-colorization-network}}
 
 For the colorization task we worked on the \textbf{Lab} colorspace. In
 this space, the \textbf{L} channel contains the luminance or intensity
@@ -182,337 +174,508 @@ u-Net and Conditional GAN --- a Tutorial}, n.d.). Similar to
 square patches (depending on the image size) and produces a \emph{real}
 or \emph{fake} prediction for each of them.
 
-In order to try different approaches, we decided to use
-\emph{Transformers} in place of the discriminator and the generator.
-\emph{Transformers} are a special architectures of DNN that make
-extensive use of attention mechanisms (Vaswani et al., 2017). Because of
-their ability to have larger receptive fields compared to convolutional
-neural networks (CNNs) that allow tracking long-range dependencies
-within an image, these attention based architectures have proven very
-effective in image processing tasks and gave rise to Visual Transformers
-or \textbf{ViT} (Dosovitskiy et al., 2020). We tried different
-architectures with ViTs generators or discriminators and measured a
-range of metrics for each of them.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\OperatorTok{!}\NormalTok{pip install fastai }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ os}
-\ImportTok{import}\NormalTok{ glob}
-\ImportTok{import}\NormalTok{ time}
-\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
-\ImportTok{from}\NormalTok{ PIL }\ImportTok{import}\NormalTok{ Image}
-\ImportTok{from}\NormalTok{ pathlib }\ImportTok{import}\NormalTok{ Path}
-\ImportTok{from}\NormalTok{ tqdm.notebook }\ImportTok{import}\NormalTok{ tqdm}
-\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
-\ImportTok{from}\NormalTok{ skimage.color }\ImportTok{import}\NormalTok{ rgb2lab, lab2rgb}
-
-\ImportTok{import}\NormalTok{ torch}
-\ImportTok{import}\NormalTok{ cv2}
-\ImportTok{from}\NormalTok{ torch }\ImportTok{import}\NormalTok{ nn, optim}
-\ImportTok{from}\NormalTok{ torchvision }\ImportTok{import}\NormalTok{ transforms}
-\ImportTok{from}\NormalTok{ torchvision.utils }\ImportTok{import}\NormalTok{ make\_grid}
-\ImportTok{from}\NormalTok{ torch.utils.data }\ImportTok{import}\NormalTok{ Dataset, DataLoader}
-
-\ImportTok{from}\NormalTok{ fastai.vision.learner }\ImportTok{import}\NormalTok{ create\_body}
-\ImportTok{from}\NormalTok{ torchvision.models.resnet }\ImportTok{import}\NormalTok{ resnet18}
-\ImportTok{from}\NormalTok{ torchvision.models }\ImportTok{import}\NormalTok{ vit\_b\_16 }\ImportTok{as}\NormalTok{ visiontransformer}
-\ImportTok{from}\NormalTok{ fastai.vision.models.unet }\ImportTok{import}\NormalTok{ DynamicUnet}
-\ImportTok{from}\NormalTok{ fastai.data.external }\ImportTok{import}\NormalTok{ untar\_data, URLs}
-
-\NormalTok{device }\OperatorTok{=}\NormalTok{ torch.device(}\StringTok{"cuda"} \ControlFlowTok{if}\NormalTok{ torch.cuda.is\_available() }\ControlFlowTok{else} \StringTok{"cpu"}\NormalTok{)}
-\BuiltInTok{print}\NormalTok{ (device)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-cpu
-\end{verbatim}
+To try different approaches, we decided to use \emph{Transformers} in
+place of the discriminator and the generator. \emph{Transformers} are a
+special architecture of DNN that make extensive use of attention
+mechanisms (Vaswani et al., 2017). Because of their ability to have
+larger receptive fields compared to convolutional neural networks
+(CNNs), they can track long-range dependencies within an image. These
+attention based architectures have proven very effective in image
+processing tasks and gave rise to Visual Transformers or \textbf{ViT}
+(Dosovitskiy et al., 2020). We tried different architectures on our own
+using ViTs either as generators or discriminators and measured a range
+of metrics for each of them. Finally, we fine tune the loss function to
+get the best results.
 
 \hypertarget{dataset}{%
-\subsubsection{Dataset}\label{dataset}}
+\subsection{Dataset}\label{dataset}}
 
 For training and validation purposes we used a subset of the COCO
 dataset of images (Lin et al., 2014) that is provided by the FastAI
 framework (\emph{Fast.ai}, n.d.). We downloaded 10.000 images from this
 dataset and randomly splited them into two sets: a training set with
-8.000 images and a validation set with 2.000 images.
+8.000 images and a validation set with 2.000 images. Then we resized the
+images so that they have manageable dimensions that allow feeding into
+the different network architectures without requiring extremely high
+computational resources or long times. Similar to (Isola et al., 2016)
+data augmentation was achieved by flipping the images horizontally (this
+is only done for the training set). We used 16 images on each batch that
+goes through the network. Each image was converted to the \textbf{Lab}
+colorspace and the channels adjusted float values between -1 and 1.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{ coco\_path }\OperatorTok{=}\NormalTok{ untar\_data(URLs.COCO\_SAMPLE)}
-\NormalTok{ coco\_path }\OperatorTok{=} \BuiltInTok{str}\NormalTok{(coco\_path) }\OperatorTok{+} \StringTok{"/train\_sample"}
-\end{Highlighting}
-\end{Shaded}
+\hypertarget{model-improvement}{%
+\subsection{Model improvement}\label{model-improvement}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{path }\OperatorTok{=}\NormalTok{ coco\_path}
-    
-\NormalTok{paths }\OperatorTok{=}\NormalTok{ glob.glob(path }\OperatorTok{+} \StringTok{"/*.jpg"}\NormalTok{) }
-\NormalTok{np.random.seed(}\DecValTok{123}\NormalTok{)}
-\NormalTok{paths\_subset }\OperatorTok{=}\NormalTok{ np.random.choice(paths, }\DecValTok{10\_000}\NormalTok{, replace}\OperatorTok{=}\VariableTok{False}\NormalTok{) }\CommentTok{\# choosing 10000 images randomly}
-\NormalTok{rand\_idxs }\OperatorTok{=}\NormalTok{ np.random.permutation(}\DecValTok{10\_000}\NormalTok{)}
-\NormalTok{train\_idxs }\OperatorTok{=}\NormalTok{ rand\_idxs[:}\DecValTok{8000}\NormalTok{] }\CommentTok{\# choosing the first 8000 as training set}
-\NormalTok{val\_idxs }\OperatorTok{=}\NormalTok{ rand\_idxs[}\DecValTok{8000}\NormalTok{:] }\CommentTok{\# choosing last 2000 as validation set}
-\NormalTok{train\_paths }\OperatorTok{=}\NormalTok{ paths\_subset[train\_idxs]}
-\NormalTok{val\_paths }\OperatorTok{=}\NormalTok{ paths\_subset[val\_idxs]}
-\BuiltInTok{print}\NormalTok{(}\BuiltInTok{len}\NormalTok{(train\_paths), }\BuiltInTok{len}\NormalTok{(val\_paths))}
+Our initial model was a variation of the original \emph{pix2pix} GAN in
+which the generator was replaced by a pre-trained \emph{ResNet18}
+\emph{UNet}. We then experimented with different visual transfomers as
+discriminators and generators. Our final model, named
+\textbf{ViT-LSGAN}, uses a ViT as the generator and least squared errors
+instead of cross entropy as the loss function of the discriminator. The
+results of all the intermediate models that we trained and tested can be
+found in \textbf{``Supplemental Materials''}.
 
-\NormalTok{fig, axes }\OperatorTok{=}\NormalTok{ plt.subplots(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{10}\NormalTok{))}
-\NormalTok{fig.suptitle(}\StringTok{\textquotesingle{}Sample images from COCO dataset\textquotesingle{}}\NormalTok{)}
-\ControlFlowTok{for}\NormalTok{ ax, img\_path }\KeywordTok{in} \BuiltInTok{zip}\NormalTok{(axes.flatten(), train\_paths):}
-\NormalTok{    ax.imshow(Image.}\BuiltInTok{open}\NormalTok{(img\_path))}
-\NormalTok{    ax.axis(}\StringTok{"off"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\hypertarget{loss-functions}{%
+\subsection{Loss functions}\label{loss-functions}}
 
-\begin{verbatim}
-8000 2000
-\end{verbatim}
+The loss function of the discriminator for each image is either the
+binary cross entropy or the least squared errors between the predictions
+and the ground truth. The ground truth is either \emph{real} if the real
+\textbf{ab} channels were fed into the discriminator, or \emph{fake} if
+the generated \textbf{ab} channels were used instead. The loss function
+of the generator was the combination of the L1 error and the loss
+function of the discriminator as if they were \emph{real} \textbf{ab}
+channels. The intuition behind is that the generator ``wins'' every time
+it fools the discriminator into assigning \emph{real} predictions to the
+generated outputs.
+
+\hypertarget{model-training-transfer-and-validation}{%
+\subsection{Model Training, Transfer and
+Validation}\label{model-training-transfer-and-validation}}
+
+For implementing these models we worked in Python and Jupyter Notebooks
+making extensive use of PyTorch and NumPy libraries. All the training
+was done on a machine equipped with an NVIDIA K80 GPU, 4 vCPUs and 61 GB
+of RAM (\emph{AWS EC2 p2.xlarge} instance). The transfer learning,
+validation and metrics calculation were done in an Intel Core i5 8th
+generation CPU with 8 GB of RAM. For validation we used the 2000 images
+from the \textbf{COCO} dataset that were not used for training, and a
+set of 70 photographs that were taken by the authors. To assess the
+different networks architectures we selected the following set of
+metrics for regression models:
+
+\begin{itemize}
+\tightlist
+\item
+  Correlation coeficient \emph{R} squared
+\item
+  Explained variance
+\item
+  Mean absolute error
+\item
+  Median absolute error
+\item
+  Mean squared error
+\end{itemize}
+
+We calculated all these metrics for each one of the \textbf{ab}
+channels.
+
+\hypertarget{approach-for-image-segmentation}{%
+\section{Approach for image
+segmentation}\label{approach-for-image-segmentation}}
+
+For foreground extraction, we first considered traditional approaches
+including grabcut, graphcut, and combinations thereof. However, when
+taking into account the fact that a) the categories of foreground
+objects (portraits) are well identified beforehand b) the accuracy of
+region segmentation should be optimized even in fairly complex
+backgrounds c) fully automated foreground segmentation, when possible,
+is likely to be preferable, we decided that deep neural network based
+segmentation methods were better candidates for this job.
+
+After conducting literature review and experimentation with various
+architectures, we chose the Deeplabv3 network (Chen et al., 2017).
+
+\hypertarget{what-is-deeplabv3}{%
+\subsection{What is Deeplabv3?}\label{what-is-deeplabv3}}
+
+Deeplabv3 is a deep convolutional network, ResNet-101-based in our case,
+which introduces a number of important concepts that distinguish it from
+conventional ConvNets and make it more suitable for semantic
+segmentation. First, Deeplabv3 employs atrous/dilated convolution for
+filters. This allows it to leverage wider field of view without
+increasing the number of parameters, and thus the amount of computation,
+involved. Second, Deeplabv3 uses atrous spatial pyramid pooling (ASPP)
+to capture objects at multiple scales. It does so by stacking together
+filters of various sampling rates. Figure \ref{fig:atrous} shows filters with
+different sampling rates (Chen et al., 2018).
 
 \begin{figure}
 \centering
-\includegraphics{Project_files/Project_8_1.png}
-\caption{png}
+\includegraphics{report_images/atrous-conv.png}
+\caption{Atrous/dilated convolutions (from https://www.mdpi.com).}
+\label{fig:atrous}
 \end{figure}
 
-Then we resized the images so that they have manageable dimensions that
-allow feeding into the different network architectures without requiring
-extremely high computational resources or long times. Similar to (Isola
-et al., 2016) data augmentation was achieved by flipping the images
-horizontally (this is only done for the training set). We used 16 images
-on each batch that goes through the network. Each image was converted to
-the \textbf{Lab} colorspace and the channels adjusted float values
-between -1 and 1.
+When sampling rate (represented by D in the image) is greater than one,
+the convolution is considered atrous/dilated.
+
+\begin{figure}
+\centering
+\includegraphics{report_images/deeplabv3.png}
+\caption{DeeplabV3 architecture (Chen et al., 2017).}
+\label{fig:deeplabv3}
+\end{figure}
+
+The loss function used by the Deeplabv3 is the sum of cross-entropy
+terms for each spatial position for the output map. Using
+ImageNet-pretrained ResNet-101 as a backend, and augmenting it with
+Atrous convolutions followed by ASPP, DeeplabV3 achieves state-of-art
+segmentation results on PASCAL-Context, PASCAL-Person-Part, and
+Cityscapes (Chen et al., 2018) (Figure \ref{fig:deeplabv3}). It also performs similarly well on
+random images as evidenced by the experiments in this project.
+
+Our choice to use Deeplabv3 has been primarily informed by the
+performance on PASCAL VOC 2012 in terms of pixel intersection-over-union
+(mIoU). Table \ref{table:miou} shows the relative performance of Deeplabv3
+vis-a-vis other comparable models (Chen et al., 2018).
+
+\begin{table}\centering\caption[Pixel intersection-over-union metrics (mIoU) of segmentation models on PASCAL VOC 2012 dataset.]{mIoU of segmentation models}\label{table:miou}\begin{tabular}{ll}
+\toprule{}                 Segmentation Method &              mIoU \\
+\midrule    Adelaide VeryDeep FCN VOC  & 79.1 \\
+LRR 4x ResNet-CRF          & 79.3 \\
+DeepLabv2-CRF              & 79.7 \\
+CentraleSupelec Deep G-CRF & 80.2 \\
+HikSeg COCO                & 81.4 \\
+SegModel                   & 81.8 \\
+Deep Layer Cascade (LC)    & 82.7 \\
+TuSimple                   & 83.1 \\
+Large Kernel Matters       & 83.6 \\
+Multipath-RefineNet        & 84.2 \\
+ResNet-38 MS COCO          & 84.9 \\
+PSPNet                     & 85.4 \\
+IDW-CNN                    & 86.3 \\
+CASIA IVA SDN              & 86.6 \\
+DIS                        & 86.8 \\
+DeepLabv3                  & 85.7 \\\bottomrule\end{tabular}\end{table}
+
+\hypertarget{binary-mask-generation-and-image-blending}{%
+\subsection{Binary mask generation and image
+blending}\label{binary-mask-generation-and-image-blending}}
+
+To produce the final blended image, we used the following procedure:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Generate a segment map using Deeplabv3
+\item
+  Convert the segment map into binary mask
+\item
+  Create reverse mask from the binary mask
+\item
+  Multiply the colorized input image by the binary mask to get the
+  colorized foreground
+\item
+  Multiply the grayscale image by the reverse mask to get the grayscale
+  background
+\item
+  Create a new image by adding the foreground and the background images
+\end{enumerate}
+
+See details of the code in the \textbf{Supplementary Materials} section.
+
+\hypertarget{results}{%
+\section{Results}\label{results}}
+
+\hypertarget{validation-of-colorization-models}{%
+\subsection{Validation of colorization
+models}\label{validation-of-colorization-models}}
+
+\begin{figure}
+\centering
+\includegraphics{results/ResNet18.png}
+\caption{Samples of results from using a ResNet18 network as the
+generator. Top row: inputs, Middle row: predictions, Bottom row: ground
+truth.}
+\label{fig:resnet18}
+\end{figure}
+
+\begin{table}\centering\caption[Metrics of ResNet18 generator on validation dataset]{ResNet18 metrics on validation dataset}\label{table:resnet18-metrics}\begin{tabular}{llll}\toprule{}                 Metric &              a-channel &             b-channel \\\midrule                R-square &     0.9762 &    0.7944 \\     Explained variance &     0.9763 &    0.8047 \\    Mean absolute error &   0.0221 &   0.0813 \\  Median absolute error &   0.0115 &  0.0533 \\     Mean squared error &  0.0016 &  0.0144 \\            Sample size &                   2000 &                  2000 \\\bottomrule\end{tabular}\end{table}
+
+The results of the initial colorization model with a ResNet18 generator
+were acceptable (Figure \ref{fig:resnet18}). However, many times the produced images did not look
+natural because of an excessive use of colors that resulted in blotches
+in the pictures. In agreement with the visual inspection, the resulting
+metrics on the validation dataset (Table \ref{table:resnet18-metrics}) showed that the network did a pretty
+good job at predicting the \textbf{a}-channel with over 97\% of the
+variance of the channel predicted by the model with a very low mean
+squared error. However, the prediction on the \textbf{b}-channel was not
+as good with the model predicting only 80\% of its variance.
+
+As explained before, to improve this results we tried variations of the
+GAN using \emph{Transformers}. We experimented with the architectures summarized in Table \ref{table:architectures}. The description of each one and their results can be
+found in the \textbf{Supplementary Materials} section.
+
+\begin{table}\centering\caption[GAN architectures trained and validated in this work.]{GAN architectures trained and validated in this work.}\label{table:architectures}\begin{tabular}{ll}
+\toprule{}                 GAN architecture & Summary of results\\
+\midrule    
+ResNet18 UNet as generator & Patches of colors, modest b-channel predictions.\\
+ViT as discriminator       & Gray images.    \\
+ViT as generator           & Gray images.    \\
+ViT-LSGAN                  & Good natural colorization, best metrics for ab-channels.  \\
+\bottomrule\end{tabular}\end{table}
+
+In particular, the results from ViT-LSGAN model were very encouraging.  We got good results on our own photographies (Figure \ref{fig:ViT-LSGAN-results}) as well as in the COCO dataset ones (Figure \ref{fig:ViT-LSGAN-results-coco}). By using visual
+transformers we got an improvement over the initial UNet based model on
+every metric in particular in the \textbf{b}-channel which was the most
+difficult to predict (Table \ref{table:ViT-LSGAN-metrics}). For example, this model was able to explain 98\%
+of the variance of the \textbf{a}-channel and 86\% of the variance of
+the \textbf{b}-channel, against 97\% and 80\%, respectively, when using
+the UNet model.
+
+\begin{figure}
+\centering
+\includegraphics{results/FINAL_ViT_generator.png}
+\caption{Samples of results of the ViT-LSGAN model. Top row: inputs,
+Middle row: predictions, Bottom row: ground truth.}
+\label{fig:ViT-LSGAN-results}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{Project_files/Project_62_1.png}
+\caption{COCO images from the validation set colorized with the final
+ViT-LSGAN model. Top row: inputs, Middle row: predictions, Bottom row:
+ground truth.}
+\label{fig:ViT-LSGAN-results-coco}
+\end{figure}
+
+\begin{table}\centering\caption[Metrics of the ViT-LSGAN model on validation dataset]{ViT metrics on validation dataset}\label{table:ViT-LSGAN-metrics}\begin{tabular}{llll}\toprule{}                 Metric &              a-channel &             b-channel \\\midrule               R-square &      0.9856 &     0.8596 \\     Explained variance &     0.9859 &    0.8620 \\    Mean absolute error &   0.0157 &   0.0625 \\Median absolute error &   0.0075 &   0.0374 \\Mean squared error &  0.0010 &  0.0095 \\Sample size &                   2000 &                  2000 \\\bottomrule\end{tabular}\end{table}
+
+\hypertarget{final-colorization-results}{%
+\subsection{Final colorization
+results}\label{final-colorization-results}}
+
+We tested our ViT-LSGAN with historic black and white urban pictures as
+well as with historic portraits (Figures \ref{fig:Montevideo} and \ref{fig:portraits}). We noticed that sometimes old
+photographs are saturated, particularly, in the sky area. This causes
+the LSGAN to interpret them as cloudy skies and producing a white sky.
+This effect can be partially overcome by adjusting the gain of the
+original photo before feeding it into the network.
+
+\begin{figure}
+\centering
+\includegraphics{Project_files/Project_72_0.png}
+\caption{Historic photos of Montevideo.}
+\label{fig:Montevideo}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{Project_files/Project_73_0.png}
+\caption{Historic portraits.}
+\label{fig:portraits}
+\end{figure}
+
+\hypertarget{segmentation-and-blending}{%
+\subsection{Segmentation and blending}\label{segmentation-and-blending}}
+
+After colorizing the images, we segmented the foreground from the
+background using the DeepLabv3 network. To obtain the final images we
+blended the colorized foreground with the original black and white
+background (Figures \ref{fig:segmentation-and-blending-1}-\ref{fig:segmentation-and-blending-7}).
+
+\begin{figure}
+\centering
+\includegraphics{deeplabv3_segmentation_files/deeplabv3_segmentation_10_0.png}
+\caption{Recolorization and segmentation example 1.}
+\label{fig:segmentation-and-blending-1}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{deeplabv3_segmentation_files/deeplabv3_segmentation_10_1.png}
+\caption{Recolorization and segmentation example 2.}
+\label{fig:segmentation-and-blending-2}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{deeplabv3_segmentation_files/deeplabv3_segmentation_10_2.png}
+\caption{Recolorization and segmentation example 3.}
+\label{fig:segmentation-and-blending-3}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{deeplabv3_segmentation_files/deeplabv3_segmentation_10_3.png}
+\caption{Recolorization and segmentation example 4.}
+\label{fig:segmentation-and-blending-4}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{deeplabv3_segmentation_files/deeplabv3_segmentation_10_4.png}
+\caption{Recolorization and segmentation example 5.}
+\label{fig:segmentation-and-blending-5}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{deeplabv3_segmentation_files/deeplabv3_segmentation_10_5.png}
+\caption{Recolorization and segmentation example 6.}
+\label{fig:segmentation-and-blending-6}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{deeplabv3_segmentation_files/deeplabv3_segmentation_10_7.png}
+\caption{Recolorization and segmentation example 7.}
+\label{fig:segmentation-and-blending-7}
+\end{figure}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\clearpage
+\hypertarget{supplemental-materials}{%
+\section{Supplemental Materials}\label{supplemental-materials}}
+
+\hypertarget{colorization-models-trained-and-tested}{%
+\subsection{Colorization models trained and
+tested}\label{colorization-models-trained-and-tested}}
+
+\hypertarget{first-approach-resnet18-generator}{%
+\subsubsection{\texorpdfstring{First approach: \emph{ResNet18}
+generator}{First approach: ResNet18 generator}}\label{first-approach-resnet18-generator}}
+
+On our first approach we employed a generator based on the ResNet18
+network. One of the challenges of GANs is that, at the beginning of the
+training, the task of the discriminator is much easier than that of the
+generator because the generated outputs are very different from the real
+ones. In this situation, the discriminator learns so much faster and
+gives no time to the generator to adapt. To avoid this, we gave the
+generator a \emph{head start} by training it alone (without the
+generator) for 20 epochs with a L1 loss function and saving its weights.
+After that we started the parallel training of the generator and the
+patch discriminator for another 20 epochs (see Figure \ref{fig:resnet18} for results).
+
+\hypertarget{second-approach-vit-as-discriminator}{%
+\subsubsection{Second approach: ViT as
+discriminator}\label{second-approach-vit-as-discriminator}}
+
+Since the results obtained from the UNet generator did not look quite
+natural, our first intention was to improve the discriminator so that it
+will be better at telling apart the \emph{real} from the \emph{fake}
+images. To do that we decided to replace the CNN based Patch
+Discriminator with a Visual Transformer.
+
+\begin{figure}
+\centering
+\includegraphics{results/ViTasDiscriminator.png}
+\caption{Samples of results from using a ViT as the discriminator
+network. Top row: inputs, Middle row: predictions, Bottom row: ground
+truth.}
+\label{fig:ViT-discriminator-results}
+\end{figure}
+
+Unfortunately, the results were not satisfactory (Figure \ref{fig:ViT-discriminator-results}). The discriminator got
+very good a discriminating real from fake very early on and gave not
+chance for the generator to adapt. The final results are just gray
+images or sepia looking images with almost no color. This is because the
+best loss the generator could achieve was by producing an average value
+on the \textbf{ab} channels disregarding of the inputs.
+
+\hypertarget{third-approach-vit-as-generator}{%
+\subsubsection{Third approach: ViT as
+generator}\label{third-approach-vit-as-generator}}
+
+Once we understood that to have a truly creative network we should put
+our efforts on the generator instead the discriminator. We decided to
+include a ViT as the generator. After exploring different options we
+selected a ViT trained in the task of completing masked images (Xie et
+al., 2021). Since this model expects a 3-channels input, we mimicked it
+just by copying the \textbf{L} channel into each of the input channels.
+We replaced the decoder block of this model by 3 convolution layers and
+activation functions. These layers converted the 14x14x768 inputs of the
+encoder into 14x14x512 outputs. A pixel shuffle layer with an upscale
+factor of 16 reshaped those outputs into the final 224x224x2 output. To
+avoid the problem of the discriminator learning too fast, we kept the
+pretraining step with the generator alone to give a \emph{head start} to
+it. We trained for 20 epochs.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{SIZE }\OperatorTok{=} \DecValTok{224}
-\KeywordTok{class}\NormalTok{ ColorizationDataset(Dataset):}
-    \KeywordTok{def} \FunctionTok{\_\_init\_\_}\NormalTok{(}\VariableTok{self}\NormalTok{, paths, split}\OperatorTok{=}\StringTok{\textquotesingle{}train\textquotesingle{}}\NormalTok{):}
-        \ControlFlowTok{if}\NormalTok{ split }\OperatorTok{==} \StringTok{\textquotesingle{}train\textquotesingle{}}\NormalTok{:}
-            \VariableTok{self}\NormalTok{.transforms }\OperatorTok{=}\NormalTok{ transforms.Compose([}
-\NormalTok{                transforms.Resize((SIZE, SIZE),  Image.Resampling.BICUBIC),}
-\NormalTok{                transforms.RandomHorizontalFlip(), }\CommentTok{\# A little data augmentation!}
-\NormalTok{            ])}
-        \ControlFlowTok{elif}\NormalTok{ split }\OperatorTok{==} \StringTok{\textquotesingle{}val\textquotesingle{}}\NormalTok{:}
-            \VariableTok{self}\NormalTok{.transforms }\OperatorTok{=}\NormalTok{ transforms.Resize((SIZE, SIZE),  Image.Resampling.BICUBIC)}
-        
-        \VariableTok{self}\NormalTok{.split }\OperatorTok{=}\NormalTok{ split}
-        \VariableTok{self}\NormalTok{.size }\OperatorTok{=}\NormalTok{ SIZE}
-        \VariableTok{self}\NormalTok{.paths }\OperatorTok{=}\NormalTok{ paths}
-    
-    \KeywordTok{def} \FunctionTok{\_\_getitem\_\_}\NormalTok{(}\VariableTok{self}\NormalTok{, idx):}
-\NormalTok{        img }\OperatorTok{=}\NormalTok{ Image.}\BuiltInTok{open}\NormalTok{(}\VariableTok{self}\NormalTok{.paths[idx]).convert(}\StringTok{"RGB"}\NormalTok{)}
-\NormalTok{        img }\OperatorTok{=} \VariableTok{self}\NormalTok{.transforms(img)}
-\NormalTok{        img }\OperatorTok{=}\NormalTok{ np.array(img)}
-\NormalTok{        img\_lab }\OperatorTok{=}\NormalTok{ rgb2lab(img).astype(}\StringTok{"float32"}\NormalTok{) }\CommentTok{\# Converting RGB to L*a*b}
-\NormalTok{        img\_lab }\OperatorTok{=}\NormalTok{ transforms.ToTensor()(img\_lab)}
-\NormalTok{        L }\OperatorTok{=}\NormalTok{ img\_lab[[}\DecValTok{0}\NormalTok{], ...] }\OperatorTok{/} \FloatTok{50.} \OperatorTok{{-}} \FloatTok{1.} \CommentTok{\# Between {-}1 and 1}
-\NormalTok{        ab }\OperatorTok{=}\NormalTok{ img\_lab[[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{], ...] }\OperatorTok{/} \FloatTok{110.} \CommentTok{\# Between {-}1 and 1}
-        
-        \ControlFlowTok{return}\NormalTok{ \{}\StringTok{\textquotesingle{}L\textquotesingle{}}\NormalTok{: L, }\StringTok{\textquotesingle{}ab\textquotesingle{}}\NormalTok{: ab\}}
-    
-    \KeywordTok{def} \FunctionTok{\_\_len\_\_}\NormalTok{(}\VariableTok{self}\NormalTok{):}
-        \ControlFlowTok{return} \BuiltInTok{len}\NormalTok{(}\VariableTok{self}\NormalTok{.paths)}
+\CommentTok{\# Build transformer based generator}
+\CommentTok{\# https://huggingface.co/docs/transformers/model\_doc/vit}
 
-\KeywordTok{def}\NormalTok{ make\_dataloaders(batch\_size}\OperatorTok{=}\DecValTok{16}\NormalTok{, n\_workers}\OperatorTok{=}\DecValTok{2}\NormalTok{, pin\_memory}\OperatorTok{=}\VariableTok{True}\NormalTok{, }\OperatorTok{**}\NormalTok{kwargs): }\CommentTok{\# A handy function to make our dataloaders}
-    \ControlFlowTok{if}\NormalTok{ (os.name}\OperatorTok{==}\StringTok{"nt"}\NormalTok{):}
-\NormalTok{        n\_workers }\OperatorTok{=} \DecValTok{0}  \CommentTok{\# In Windows, n\_workers should be 0}
-\NormalTok{    dataset }\OperatorTok{=}\NormalTok{ ColorizationDataset(}\OperatorTok{**}\NormalTok{kwargs)}
-\NormalTok{    dataloader }\OperatorTok{=}\NormalTok{ DataLoader(dataset, batch\_size}\OperatorTok{=}\NormalTok{batch\_size, num\_workers}\OperatorTok{=}\NormalTok{n\_workers,}
-\NormalTok{                            pin\_memory}\OperatorTok{=}\NormalTok{pin\_memory)}
-    \ControlFlowTok{return}\NormalTok{ dataloader}
-\end{Highlighting}
-\end{Shaded}
+\ImportTok{from}\NormalTok{ transformers }\ImportTok{import}\NormalTok{ ViTForMaskedImageModeling, ViTConfig}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{train\_dl }\OperatorTok{=}\NormalTok{ make\_dataloaders(paths}\OperatorTok{=}\NormalTok{train\_paths, split}\OperatorTok{=}\StringTok{\textquotesingle{}train\textquotesingle{}}\NormalTok{)}
-\NormalTok{val\_dl }\OperatorTok{=}\NormalTok{ make\_dataloaders(paths}\OperatorTok{=}\NormalTok{val\_paths, split}\OperatorTok{=}\StringTok{\textquotesingle{}val\textquotesingle{}}\NormalTok{)}
 
-\NormalTok{data }\OperatorTok{=} \BuiltInTok{next}\NormalTok{(}\BuiltInTok{iter}\NormalTok{(train\_dl))}
-\NormalTok{Ls, abs\_ }\OperatorTok{=}\NormalTok{ data[}\StringTok{\textquotesingle{}L\textquotesingle{}}\NormalTok{], data[}\StringTok{\textquotesingle{}ab\textquotesingle{}}\NormalTok{]}
-\BuiltInTok{print}\NormalTok{(Ls.shape, abs\_.shape)}
-\end{Highlighting}
-\end{Shaded}
+\KeywordTok{def}\NormalTok{ build\_VTi\_generator():}
 
-\begin{verbatim}
-torch.Size([16, 1, 224, 224]) torch.Size([16, 2, 224, 224])
-\end{verbatim}
+    \CommentTok{\#\# Pretrained generator ViT, 3{-}input channels, multilayer decoder.}
+\NormalTok{    device }\OperatorTok{=}\NormalTok{ torch.device(}\StringTok{"cuda"} \ControlFlowTok{if}\NormalTok{ torch.cuda.is\_available() }\ControlFlowTok{else} \StringTok{"cpu"}\NormalTok{)}
+\NormalTok{    model }\OperatorTok{=}\NormalTok{ ViTForMaskedImageModeling.from\_pretrained(}\StringTok{"google/vit{-}base{-}patch16{-}224{-}in21k"}\NormalTok{)}
 
-\hypertarget{loss-functions}{%
-\subsubsection{Loss functions}\label{loss-functions}}
-
-The loss function of the discriminator for each image is the binary
-cross entropy between the predictions and the ground truth: \emph{real}
-if the real \textbf{ab} channels were fed into the discriminator of
-\emph{fake} if the generated \textbf{ab} channels were used instead. The
-loss function of the generator was the combination of the L1 error and
-the loss function of the discriminator as it were \emph{real}
-\textbf{ab} channels. The intuition behind is that the generator
-``wins'' every time it fools the discriminator into assigning
-\emph{real} predictions to its outputs.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{class}\NormalTok{ GANLoss(nn.Module):}
-    \KeywordTok{def} \FunctionTok{\_\_init\_\_}\NormalTok{(}\VariableTok{self}\NormalTok{, gan\_mode}\OperatorTok{=}\StringTok{\textquotesingle{}vanilla\textquotesingle{}}\NormalTok{, real\_label}\OperatorTok{=}\FloatTok{1.0}\NormalTok{, fake\_label}\OperatorTok{=}\FloatTok{0.0}\NormalTok{):}
-        \BuiltInTok{super}\NormalTok{().}\FunctionTok{\_\_init\_\_}\NormalTok{()}
-        \VariableTok{self}\NormalTok{.register\_buffer(}\StringTok{\textquotesingle{}real\_label\textquotesingle{}}\NormalTok{, torch.tensor(real\_label))}
-        \VariableTok{self}\NormalTok{.register\_buffer(}\StringTok{\textquotesingle{}fake\_label\textquotesingle{}}\NormalTok{, torch.tensor(fake\_label))}
-        \ControlFlowTok{if}\NormalTok{ gan\_mode }\OperatorTok{==} \StringTok{\textquotesingle{}vanilla\textquotesingle{}}\NormalTok{:}
-            \VariableTok{self}\NormalTok{.loss }\OperatorTok{=}\NormalTok{ nn.BCEWithLogitsLoss()}
-        \ControlFlowTok{elif}\NormalTok{ gan\_mode }\OperatorTok{==} \StringTok{\textquotesingle{}lsgan\textquotesingle{}}\NormalTok{:}
-            \VariableTok{self}\NormalTok{.loss }\OperatorTok{=}\NormalTok{ nn.MSELoss()}
-    
-    \KeywordTok{def}\NormalTok{ get\_labels(}\VariableTok{self}\NormalTok{, preds, target\_is\_real):}
-        \ControlFlowTok{if}\NormalTok{ target\_is\_real:}
-\NormalTok{            labels }\OperatorTok{=} \VariableTok{self}\NormalTok{.real\_label}
-        \ControlFlowTok{else}\NormalTok{:}
-\NormalTok{            labels }\OperatorTok{=} \VariableTok{self}\NormalTok{.fake\_label}
-        \ControlFlowTok{return}\NormalTok{ labels.expand\_as(preds)}
-    
-    \KeywordTok{def} \FunctionTok{\_\_call\_\_}\NormalTok{(}\VariableTok{self}\NormalTok{, preds, target\_is\_real):}
-\NormalTok{        labels }\OperatorTok{=} \VariableTok{self}\NormalTok{.get\_labels(preds, target\_is\_real)}
-\NormalTok{        loss }\OperatorTok{=} \VariableTok{self}\NormalTok{.loss(preds, labels) }
-        \ControlFlowTok{return}\NormalTok{ loss}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{def}\NormalTok{ init\_weights(net, init}\OperatorTok{=}\StringTok{\textquotesingle{}norm\textquotesingle{}}\NormalTok{, gain}\OperatorTok{=}\FloatTok{0.02}\NormalTok{):}
-    
-    \KeywordTok{def}\NormalTok{ init\_func(m):}
-\NormalTok{        classname }\OperatorTok{=}\NormalTok{ m.\_\_class\_\_.}\VariableTok{\_\_name\_\_}
-        \ControlFlowTok{if} \BuiltInTok{hasattr}\NormalTok{(m, }\StringTok{\textquotesingle{}weight\textquotesingle{}}\NormalTok{) }\KeywordTok{and} \StringTok{\textquotesingle{}Conv\textquotesingle{}} \KeywordTok{in}\NormalTok{ classname:}
-            \ControlFlowTok{if}\NormalTok{ init }\OperatorTok{==} \StringTok{\textquotesingle{}norm\textquotesingle{}}\NormalTok{:}
-\NormalTok{                nn.init.normal\_(m.weight.data, mean}\OperatorTok{=}\FloatTok{0.0}\NormalTok{, std}\OperatorTok{=}\NormalTok{gain)}
-            \ControlFlowTok{elif}\NormalTok{ init }\OperatorTok{==} \StringTok{\textquotesingle{}xavier\textquotesingle{}}\NormalTok{:}
-\NormalTok{                nn.init.xavier\_normal\_(m.weight.data, gain}\OperatorTok{=}\NormalTok{gain)}
-            \ControlFlowTok{elif}\NormalTok{ init }\OperatorTok{==} \StringTok{\textquotesingle{}kaiming\textquotesingle{}}\NormalTok{:}
-\NormalTok{                nn.init.kaiming\_normal\_(m.weight.data, a}\OperatorTok{=}\DecValTok{0}\NormalTok{, mode}\OperatorTok{=}\StringTok{\textquotesingle{}fan\_in\textquotesingle{}}\NormalTok{)}
-            
-            \ControlFlowTok{if} \BuiltInTok{hasattr}\NormalTok{(m, }\StringTok{\textquotesingle{}bias\textquotesingle{}}\NormalTok{) }\KeywordTok{and}\NormalTok{ m.bias }\KeywordTok{is} \KeywordTok{not} \VariableTok{None}\NormalTok{:}
-\NormalTok{                nn.init.constant\_(m.bias.data, }\FloatTok{0.0}\NormalTok{)}
-        \ControlFlowTok{elif} \StringTok{\textquotesingle{}BatchNorm2d\textquotesingle{}} \KeywordTok{in}\NormalTok{ classname:}
-\NormalTok{            nn.init.normal\_(m.weight.data, }\FloatTok{1.}\NormalTok{, gain)}
-\NormalTok{            nn.init.constant\_(m.bias.data, }\FloatTok{0.}\NormalTok{)}
-            
-\NormalTok{    net.}\BuiltInTok{apply}\NormalTok{(init\_func)}
-    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"model initialized with }\SpecialCharTok{\{}\NormalTok{init}\SpecialCharTok{\}}\SpecialStringTok{ initialization"}\NormalTok{)}
-    \ControlFlowTok{return}\NormalTok{ net}
-
-\KeywordTok{def}\NormalTok{ init\_model(model, device):}
+\NormalTok{    model.decoder }\OperatorTok{=}\NormalTok{ nn.Sequential(nn.Conv2d(}\DecValTok{768}\NormalTok{, }\DecValTok{768}\NormalTok{, kernel\_size}\OperatorTok{=}\DecValTok{3}\NormalTok{, stride}\OperatorTok{=}\DecValTok{1}\NormalTok{, padding}\OperatorTok{=}\DecValTok{1}\NormalTok{), }\OperatorTok{\textbackslash{}}
+\NormalTok{                                    nn.ReLU(inplace}\OperatorTok{=}\VariableTok{True}\NormalTok{),}
+\NormalTok{                                    nn.Conv2d(}\DecValTok{768}\NormalTok{, }\DecValTok{768}\NormalTok{, kernel\_size}\OperatorTok{=}\DecValTok{3}\NormalTok{, stride}\OperatorTok{=}\DecValTok{1}\NormalTok{, padding}\OperatorTok{=}\DecValTok{1}\NormalTok{), }\OperatorTok{\textbackslash{}}
+\NormalTok{                                    nn.ReLU(inplace}\OperatorTok{=}\VariableTok{True}\NormalTok{),}
+\NormalTok{                                    nn.Conv2d(}\DecValTok{768}\NormalTok{, }\DecValTok{512}\NormalTok{, kernel\_size}\OperatorTok{=}\DecValTok{3}\NormalTok{, stride}\OperatorTok{=}\DecValTok{1}\NormalTok{, padding}\OperatorTok{=}\DecValTok{1}\NormalTok{), }\OperatorTok{\textbackslash{}}
+\NormalTok{                                    nn.PixelShuffle(upscale\_factor}\OperatorTok{=}\DecValTok{16}\NormalTok{))}
 \NormalTok{    model }\OperatorTok{=}\NormalTok{ model.to(device)}
-\NormalTok{    model }\OperatorTok{=}\NormalTok{ init\_weights(model)}
     \ControlFlowTok{return}\NormalTok{ model}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{class}\NormalTok{ AverageMeter:}
-    \KeywordTok{def} \FunctionTok{\_\_init\_\_}\NormalTok{(}\VariableTok{self}\NormalTok{):}
-        \VariableTok{self}\NormalTok{.reset()}
-        
-    \KeywordTok{def}\NormalTok{ reset(}\VariableTok{self}\NormalTok{):}
-        \VariableTok{self}\NormalTok{.count, }\VariableTok{self}\NormalTok{.avg, }\VariableTok{self}\NormalTok{.}\BuiltInTok{sum} \OperatorTok{=}\NormalTok{ [}\FloatTok{0.}\NormalTok{] }\OperatorTok{*} \DecValTok{3}
-    
-    \KeywordTok{def}\NormalTok{ update(}\VariableTok{self}\NormalTok{, val, count}\OperatorTok{=}\DecValTok{1}\NormalTok{):}
-        \VariableTok{self}\NormalTok{.count }\OperatorTok{+=}\NormalTok{ count}
-        \VariableTok{self}\NormalTok{.}\BuiltInTok{sum} \OperatorTok{+=}\NormalTok{ count }\OperatorTok{*}\NormalTok{ val}
-        \VariableTok{self}\NormalTok{.avg }\OperatorTok{=} \VariableTok{self}\NormalTok{.}\BuiltInTok{sum} \OperatorTok{/} \VariableTok{self}\NormalTok{.count}
+\begin{figure}
+\centering
+\includegraphics{results/Pretrained3channelViT_task_pretraining_result.png}
+\caption{Samples of results from pretraining the ViT generator alone.
+Top row: inputs, Middle row: predictions, Bottom row: ground truth.}
+\label{fig:pretraining-ViT-results}
+\end{figure}
 
-\KeywordTok{def}\NormalTok{ create\_loss\_meters():}
-\NormalTok{    loss\_D\_fake }\OperatorTok{=}\NormalTok{ AverageMeter()}
-\NormalTok{    loss\_D\_real }\OperatorTok{=}\NormalTok{ AverageMeter()}
-\NormalTok{    loss\_D }\OperatorTok{=}\NormalTok{ AverageMeter()}
-\NormalTok{    loss\_G\_GAN }\OperatorTok{=}\NormalTok{ AverageMeter()}
-\NormalTok{    loss\_G\_L1 }\OperatorTok{=}\NormalTok{ AverageMeter()}
-\NormalTok{    loss\_G }\OperatorTok{=}\NormalTok{ AverageMeter()}
-    
-    \ControlFlowTok{return}\NormalTok{ \{}\StringTok{\textquotesingle{}loss\_D\_fake\textquotesingle{}}\NormalTok{: loss\_D\_fake,}
-            \StringTok{\textquotesingle{}loss\_D\_real\textquotesingle{}}\NormalTok{: loss\_D\_real,}
-            \StringTok{\textquotesingle{}loss\_D\textquotesingle{}}\NormalTok{: loss\_D,}
-            \StringTok{\textquotesingle{}loss\_G\_GAN\textquotesingle{}}\NormalTok{: loss\_G\_GAN,}
-            \StringTok{\textquotesingle{}loss\_G\_L1\textquotesingle{}}\NormalTok{: loss\_G\_L1,}
-            \StringTok{\textquotesingle{}loss\_G\textquotesingle{}}\NormalTok{: loss\_G\}}
+\begin{figure}
+\centering
+\includegraphics{results/Pretrained3channelViT_task_pretraining_FINAL_result.png}
+\caption{Samples of results after training the ViT generator with the
+discriminator. Top row: inputs, Middle row: predictions, Bottom row:
+ground truth.}
+\label{fig:ViT-pretrained-results}
+\end{figure}
 
-\KeywordTok{def}\NormalTok{ update\_losses(model, loss\_meter\_dict, count):}
-    \ControlFlowTok{for}\NormalTok{ loss\_name, loss\_meter }\KeywordTok{in}\NormalTok{ loss\_meter\_dict.items():}
-\NormalTok{        loss }\OperatorTok{=} \BuiltInTok{getattr}\NormalTok{(model, loss\_name)}
-\NormalTok{        loss\_meter.update(loss.item(), count}\OperatorTok{=}\NormalTok{count)}
+The results were not very encouraging. After the pretraining when the
+generator trained alone, the results were acceptable although the colors
+were not very bright or varied (Figure \ref{fig:pretraining-ViT-results}). However, when we trained with the
+discriminator, the discriminator won the game and the generator produced
+just gray images, as before (Figure \ref{fig:ViT-pretrained-results}).
 
-\KeywordTok{def}\NormalTok{ lab\_to\_rgb(L, ab):}
-    \CommentTok{"""}
-\CommentTok{    Takes a batch of images}
-\CommentTok{    """}
-    
-\NormalTok{    L }\OperatorTok{=}\NormalTok{ (L }\OperatorTok{+} \FloatTok{1.}\NormalTok{) }\OperatorTok{*} \FloatTok{50.}
-\NormalTok{    ab }\OperatorTok{=}\NormalTok{ ab }\OperatorTok{*} \FloatTok{110.}
-\NormalTok{    Lab }\OperatorTok{=}\NormalTok{ torch.cat([L, ab], dim}\OperatorTok{=}\DecValTok{1}\NormalTok{).permute(}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{).cpu().numpy()}
-\NormalTok{    rgb\_imgs }\OperatorTok{=}\NormalTok{ []}
-    \ControlFlowTok{for}\NormalTok{ img }\KeywordTok{in}\NormalTok{ Lab:}
-\NormalTok{        img\_rgb }\OperatorTok{=}\NormalTok{ lab2rgb(img)}
-\NormalTok{        rgb\_imgs.append(img\_rgb)}
-    \ControlFlowTok{return}\NormalTok{ np.stack(rgb\_imgs, axis}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
-    
-\KeywordTok{def}\NormalTok{ model\_eval(model, data):}
-\NormalTok{    model.net\_G.}\BuiltInTok{eval}\NormalTok{()}
-    \ControlFlowTok{with}\NormalTok{ torch.no\_grad():}
-\NormalTok{        model.setup\_input(data)}
-\NormalTok{        model.forward()}
-\NormalTok{    model.net\_G.train()}
-\NormalTok{    fake\_color }\OperatorTok{=}\NormalTok{ model.fake\_color.detach()}
-\NormalTok{    real\_color }\OperatorTok{=}\NormalTok{ model.ab}
-\NormalTok{    L }\OperatorTok{=}\NormalTok{ model.L}
-\NormalTok{    fake\_imgs }\OperatorTok{=}\NormalTok{ lab\_to\_rgb(L, fake\_color)}
-\NormalTok{    real\_imgs }\OperatorTok{=}\NormalTok{ lab\_to\_rgb(L, real\_color)}
-    \ControlFlowTok{return}\NormalTok{ fake\_imgs, real\_imgs}
-    
-\KeywordTok{def}\NormalTok{ visualize(model, data, save}\OperatorTok{=}\VariableTok{True}\NormalTok{):}
-\NormalTok{    model.net\_G.}\BuiltInTok{eval}\NormalTok{()}
-    \ControlFlowTok{with}\NormalTok{ torch.no\_grad():}
-\NormalTok{        model.setup\_input(data)}
-\NormalTok{        model.forward()}
-\NormalTok{    model.net\_G.train()}
-\NormalTok{    fake\_color }\OperatorTok{=}\NormalTok{ model.fake\_color.detach()}
-\NormalTok{    real\_color }\OperatorTok{=}\NormalTok{ model.ab}
-\NormalTok{    L }\OperatorTok{=}\NormalTok{ model.L}
-\NormalTok{    fake\_imgs }\OperatorTok{=}\NormalTok{ lab\_to\_rgb(L, fake\_color)}
-\NormalTok{    real\_imgs }\OperatorTok{=}\NormalTok{ lab\_to\_rgb(L, real\_color)}
-\NormalTok{    fig }\OperatorTok{=}\NormalTok{ plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{15}\NormalTok{, }\DecValTok{8}\NormalTok{))}
-    \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\DecValTok{5}\NormalTok{):}
-\NormalTok{        ax }\OperatorTok{=}\NormalTok{ plt.subplot(}\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, i }\OperatorTok{+} \DecValTok{1}\NormalTok{)}
-\NormalTok{        ax.imshow(L[i][}\DecValTok{0}\NormalTok{].cpu(), cmap}\OperatorTok{=}\StringTok{\textquotesingle{}gray\textquotesingle{}}\NormalTok{)}
-\NormalTok{        ax.axis(}\StringTok{"off"}\NormalTok{)}
-\NormalTok{        ax }\OperatorTok{=}\NormalTok{ plt.subplot(}\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, i }\OperatorTok{+} \DecValTok{1} \OperatorTok{+} \DecValTok{5}\NormalTok{)}
-\NormalTok{        ax.imshow(fake\_imgs[i])}
-\NormalTok{        ax.axis(}\StringTok{"off"}\NormalTok{)}
-\NormalTok{        ax }\OperatorTok{=}\NormalTok{ plt.subplot(}\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, i }\OperatorTok{+} \DecValTok{1} \OperatorTok{+} \DecValTok{10}\NormalTok{)}
-\NormalTok{        ax.imshow(real\_imgs[i])}
-\NormalTok{        ax.axis(}\StringTok{"off"}\NormalTok{)}
-\NormalTok{    plt.show()}
-    \ControlFlowTok{if}\NormalTok{ save:}
-\NormalTok{        fig.savefig(}\SpecialStringTok{f"output/colorization\_}\SpecialCharTok{\{}\NormalTok{time}\SpecialCharTok{.}\NormalTok{time()}\SpecialCharTok{\}}\SpecialStringTok{.png"}\NormalTok{)}
-    \ControlFlowTok{return}\NormalTok{ fake\_imgs, real\_imgs}
-        
-\KeywordTok{def}\NormalTok{ log\_results(loss\_meter\_dict):}
-    \ControlFlowTok{for}\NormalTok{ loss\_name, loss\_meter }\KeywordTok{in}\NormalTok{ loss\_meter\_dict.items():}
-        \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"}\SpecialCharTok{\{}\NormalTok{loss\_name}\SpecialCharTok{\}}\SpecialStringTok{: }\SpecialCharTok{\{}\NormalTok{loss\_meter}\SpecialCharTok{.}\NormalTok{avg}\SpecialCharTok{:.5f\}}\SpecialStringTok{"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\hypertarget{fourth-approach-lsgan-with-vit}{%
+\subsubsection{Fourth approach: LSGAN with
+ViT}\label{fourth-approach-lsgan-with-vit}}
 
-\hypertarget{model}{%
-\subsubsection{Model}\label{model}}
+The other main challenge of training a GAN is choosing the right loss
+function. During training of regular networks a convergence of the loss
+function to a small enough value signals that the network has achieved
+an equilibrium and cannot learn more from the training data. However,
+training of a GAN is a two players game in which each one tries to
+minimize its own loss by maximizing the other player loss. The generator
+and discriminator losses should not converge but stay in a permanent
+unstable equilibrium which signals that the game is still being played.
+
+The loss function is what gives the gradient the generator needs to
+learn to fool the discriminator and not all loss functions are equal for
+this task. As already mentioned, at the beginning of the training it is
+very easy for the discriminator to tell fake from real. When Cross
+Entropy is used, it can provide very low or vanishing gradients at the
+start of the training that do not help the improvement of the generator.
+To overcome this problem, it has been suggested the use of least squared
+errors loss functions (Mao et al., 2016). Therefore, we replaced the BCE
+loss with least square errors loss to construct a \textbf{ViT-LSGAN}.
+This architecture gave the best results. The results and metrics
+obtained with this model were presented before (Figures \ref{fig:ViT-LSGAN-results} and \ref{fig:ViT-LSGAN-results-coco}, Table \ref{table:ViT-LSGAN-metrics}).
+
+\hypertarget{image-upscaling}{%
+\subsection{Image Upscaling}\label{image-upscaling}}
+
+The ViT-LSGAN was trained with 224 by 224 images, so it is better to use
+downsampled images for transfering color. To colorize the full size
+image, we upscaled the outputs of the network by resizing the predicted
+\textbf{ab} channels to the size of the original \textbf{L} channel, and
+combined the results with the \textbf{L} channel to produce a color
+image in the \textbf{Lab} colorspace.
+
+\clearpage
+\hypertarget{selected-python-code-sections}{%
+\subsection{Selected Python code
+sections}\label{selected-python-code-sections}}
+
+\hypertarget{colorization-model-class}{%
+\subsubsection{Colorization Model
+class}\label{colorization-model-class}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -551,7 +714,7 @@ the loss function of the discriminator as it were \emph{real}
         
     \KeywordTok{def}\NormalTok{ forward(}\VariableTok{self}\NormalTok{):}
         \ControlFlowTok{if}\NormalTok{ (}\VariableTok{self}\NormalTok{.use\_ViT\_gen }\OperatorTok{==} \VariableTok{True}\NormalTok{):}
-\NormalTok{            outputs }\OperatorTok{=} \VariableTok{self}\NormalTok{.net\_G(}\VariableTok{self}\NormalTok{.L.repeat(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\NormalTok{            outputs }\OperatorTok{=} \VariableTok{self}\NormalTok{.net\_G(}\VariableTok{self}\NormalTok{.L.repeat(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))  }\CommentTok{\# Copy the L channel 3 times to mimick the 3{-}channels input that the pretrained network requires.}
             \VariableTok{self}\NormalTok{.fake\_color }\OperatorTok{=}\NormalTok{ outputs.logits}
         \ControlFlowTok{else}\NormalTok{:}
             \VariableTok{self}\NormalTok{.fake\_color }\OperatorTok{=} \VariableTok{self}\NormalTok{.net\_G(}\VariableTok{self}\NormalTok{.L)}
@@ -589,768 +752,124 @@ the loss function of the discriminator as it were \emph{real}
         \VariableTok{self}\NormalTok{.opt\_G.step()}
 \end{Highlighting}
 \end{Shaded}
+\clearpage
+\hypertarget{deeplabv3-based-segmentation}{%
+\subsubsection{DeepLabv3 based
+segmentation}\label{deeplabv3-based-segmentation}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{class}\NormalTok{ PatchDiscriminator(nn.Module):}
-    \KeywordTok{def} \FunctionTok{\_\_init\_\_}\NormalTok{(}\VariableTok{self}\NormalTok{, input\_c, num\_filters}\OperatorTok{=}\DecValTok{64}\NormalTok{, n\_down}\OperatorTok{=}\DecValTok{3}\NormalTok{):}
-        \BuiltInTok{super}\NormalTok{().}\FunctionTok{\_\_init\_\_}\NormalTok{()}
-\NormalTok{        model }\OperatorTok{=}\NormalTok{ [}\VariableTok{self}\NormalTok{.get\_layers(input\_c, num\_filters, norm}\OperatorTok{=}\VariableTok{False}\NormalTok{)]}
-\NormalTok{        model }\OperatorTok{+=}\NormalTok{ [}\VariableTok{self}\NormalTok{.get\_layers(num\_filters }\OperatorTok{*} \DecValTok{2} \OperatorTok{**}\NormalTok{ i, num\_filters }\OperatorTok{*} \DecValTok{2} \OperatorTok{**}\NormalTok{ (i }\OperatorTok{+} \DecValTok{1}\NormalTok{), s}\OperatorTok{=}\DecValTok{1} \ControlFlowTok{if}\NormalTok{ i }\OperatorTok{==}\NormalTok{ (n\_down}\OperatorTok{{-}}\DecValTok{1}\NormalTok{) }\ControlFlowTok{else} \DecValTok{2}\NormalTok{) }
-                          \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(n\_down)] }\CommentTok{\# the \textquotesingle{}if\textquotesingle{} statement is taking care of not using}
-                                                  \CommentTok{\# stride of 2 for the last block in this loop}
-\NormalTok{        model }\OperatorTok{+=}\NormalTok{ [}\VariableTok{self}\NormalTok{.get\_layers(num\_filters }\OperatorTok{*} \DecValTok{2} \OperatorTok{**}\NormalTok{ n\_down, }\DecValTok{1}\NormalTok{, s}\OperatorTok{=}\DecValTok{1}\NormalTok{, norm}\OperatorTok{=}\VariableTok{False}\NormalTok{, act}\OperatorTok{=}\VariableTok{False}\NormalTok{)] }\CommentTok{\# Make sure to not use normalization or}
-                                                                                             \CommentTok{\# activation for the last layer of the model}
-        \VariableTok{self}\NormalTok{.model }\OperatorTok{=}\NormalTok{ nn.Sequential(}\OperatorTok{*}\NormalTok{model)                                                   }
-        
-    \KeywordTok{def}\NormalTok{ get\_layers(}\VariableTok{self}\NormalTok{, ni, nf, k}\OperatorTok{=}\DecValTok{4}\NormalTok{, s}\OperatorTok{=}\DecValTok{2}\NormalTok{, p}\OperatorTok{=}\DecValTok{1}\NormalTok{, norm}\OperatorTok{=}\VariableTok{True}\NormalTok{, act}\OperatorTok{=}\VariableTok{True}\NormalTok{): }\CommentTok{\# when needing to make some repeatitive blocks of layers,}
-\NormalTok{        layers }\OperatorTok{=}\NormalTok{ [nn.Conv2d(ni, nf, k, s, p, bias}\OperatorTok{=}\KeywordTok{not}\NormalTok{ norm)]          }\CommentTok{\# it\textquotesingle{}s always helpful to make a separate method for that purpose}
-        \ControlFlowTok{if}\NormalTok{ norm: layers }\OperatorTok{+=}\NormalTok{ [nn.BatchNorm2d(nf)]}
-        \ControlFlowTok{if}\NormalTok{ act: layers }\OperatorTok{+=}\NormalTok{ [nn.LeakyReLU(}\FloatTok{0.2}\NormalTok{, }\VariableTok{True}\NormalTok{)]}
-        \ControlFlowTok{return}\NormalTok{ nn.Sequential(}\OperatorTok{*}\NormalTok{layers)}
-    
-    \KeywordTok{def}\NormalTok{ forward(}\VariableTok{self}\NormalTok{, x):}
-        \ControlFlowTok{return} \VariableTok{self}\NormalTok{.model(x)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{def}\NormalTok{ build\_res\_unet(n\_input}\OperatorTok{=}\DecValTok{1}\NormalTok{, n\_output}\OperatorTok{=}\DecValTok{2}\NormalTok{, size}\OperatorTok{=}\DecValTok{256}\NormalTok{):}
-\NormalTok{    device }\OperatorTok{=}\NormalTok{ torch.device(}\StringTok{"cuda"} \ControlFlowTok{if}\NormalTok{ torch.cuda.is\_available() }\ControlFlowTok{else} \StringTok{"cpu"}\NormalTok{)}
-\NormalTok{    body }\OperatorTok{=}\NormalTok{ create\_body(resnet18, pretrained}\OperatorTok{=}\VariableTok{True}\NormalTok{, n\_in}\OperatorTok{=}\NormalTok{n\_input, cut}\OperatorTok{={-}}\DecValTok{2}\NormalTok{)}
-\NormalTok{    net\_G }\OperatorTok{=}\NormalTok{ DynamicUnet(body, n\_output, (size, size)).to(device)}
-    \ControlFlowTok{return}\NormalTok{ net\_G}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{def}\NormalTok{ build\_visiontransformer(n\_output}\OperatorTok{=}\DecValTok{900}\NormalTok{, size}\OperatorTok{=}\DecValTok{256}\NormalTok{):}
-\NormalTok{    net\_d }\OperatorTok{=}\NormalTok{ visiontransformer(image\_size}\OperatorTok{=}\NormalTok{size)}
-\NormalTok{    net\_d.heads }\OperatorTok{=}\NormalTok{ nn.Linear(}\DecValTok{768}\NormalTok{, n\_output)}
-\NormalTok{    torch.nn.init.xavier\_uniform(net\_d.heads.weight)}
-    \ControlFlowTok{return}\NormalTok{ net\_d}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Build transformer based generator}
-\CommentTok{\# https://huggingface.co/docs/transformers/model\_doc/vit}
-
-\ImportTok{from}\NormalTok{ transformers }\ImportTok{import}\NormalTok{ ViTForMaskedImageModeling, ViTConfig}
-
-
-\KeywordTok{def}\NormalTok{ build\_VTi\_generator():}
-\NormalTok{    device }\OperatorTok{=}\NormalTok{ torch.device(}\StringTok{"cuda"} \ControlFlowTok{if}\NormalTok{ torch.cuda.is\_available() }\ControlFlowTok{else} \StringTok{"cpu"}\NormalTok{)}
-\NormalTok{    model }\OperatorTok{=}\NormalTok{ ViTForMaskedImageModeling.from\_pretrained(}\StringTok{"google/vit{-}base{-}patch16{-}224{-}in21k"}\NormalTok{)}
-\CommentTok{\#    config = ViTConfig(num\_channels=1)}
-\CommentTok{\#    model = ViTForMaskedImageModeling(config)}
-\CommentTok{\#    model.decoder = nn.Sequential(nn.Conv2d(768, 512, kernel\_size=(1, 1), stride=(1, 1)), nn.PixelShuffle(upscale\_factor=16))   \#\# version 1 channel}
-\NormalTok{    model.decoder }\OperatorTok{=}\NormalTok{ nn.Sequential(nn.Conv2d(}\DecValTok{768}\NormalTok{, }\DecValTok{768}\NormalTok{, kernel\_size}\OperatorTok{=}\DecValTok{3}\NormalTok{, stride}\OperatorTok{=}\DecValTok{1}\NormalTok{, padding}\OperatorTok{=}\DecValTok{1}\NormalTok{), }\OperatorTok{\textbackslash{}}
-\NormalTok{                                    nn.ReLU(inplace}\OperatorTok{=}\VariableTok{True}\NormalTok{),}
-\NormalTok{                                    nn.Conv2d(}\DecValTok{768}\NormalTok{, }\DecValTok{768}\NormalTok{, kernel\_size}\OperatorTok{=}\DecValTok{3}\NormalTok{, stride}\OperatorTok{=}\DecValTok{1}\NormalTok{, padding}\OperatorTok{=}\DecValTok{1}\NormalTok{), }\OperatorTok{\textbackslash{}}
-\NormalTok{                                    nn.ReLU(inplace}\OperatorTok{=}\VariableTok{True}\NormalTok{),}
-\NormalTok{                                    nn.Conv2d(}\DecValTok{768}\NormalTok{, }\DecValTok{512}\NormalTok{, kernel\_size}\OperatorTok{=}\DecValTok{3}\NormalTok{, stride}\OperatorTok{=}\DecValTok{1}\NormalTok{, padding}\OperatorTok{=}\DecValTok{1}\NormalTok{), }\OperatorTok{\textbackslash{}}
-\NormalTok{                                    nn.PixelShuffle(upscale\_factor}\OperatorTok{=}\DecValTok{16}\NormalTok{))}
-\NormalTok{    model }\OperatorTok{=}\NormalTok{ model.to(device)}
-    \ControlFlowTok{return}\NormalTok{ model}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{def}\NormalTok{ pretrain\_generator(net\_G, train\_dl, opt, criterion, epochs):}
-    \ControlFlowTok{for}\NormalTok{ e }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(epochs):}
-\NormalTok{        loss\_meter }\OperatorTok{=}\NormalTok{ AverageMeter()}
-        \ControlFlowTok{for}\NormalTok{ data }\KeywordTok{in}\NormalTok{ tqdm(train\_dl):}
-\NormalTok{            L, ab }\OperatorTok{=}\NormalTok{ data[}\StringTok{\textquotesingle{}L\textquotesingle{}}\NormalTok{].to(device), data[}\StringTok{\textquotesingle{}ab\textquotesingle{}}\NormalTok{].to(device)}
-\NormalTok{            preds }\OperatorTok{=}\NormalTok{ net\_G(L.repeat(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
-\NormalTok{            preds }\OperatorTok{=}\NormalTok{ preds.logits}
-\NormalTok{            loss }\OperatorTok{=}\NormalTok{ criterion(preds, ab)}
-\NormalTok{            opt.zero\_grad()}
-\NormalTok{            loss.backward()}
-\NormalTok{            opt.step()}
-            
-\NormalTok{            loss\_meter.update(loss.item(), L.size(}\DecValTok{0}\NormalTok{))}
-            
-        \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Epoch }\SpecialCharTok{\{}\NormalTok{e }\OperatorTok{+} \DecValTok{1}\SpecialCharTok{\}}\SpecialStringTok{/}\SpecialCharTok{\{}\NormalTok{epochs}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
-        \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"L1 Loss: }\SpecialCharTok{\{}\NormalTok{loss\_meter}\SpecialCharTok{.}\NormalTok{avg}\SpecialCharTok{:.5f\}}\SpecialStringTok{"}\NormalTok{)}
-        \CommentTok{\#torch.save(net\_G.state\_dict(), \textquotesingle{}models/net\_G\_resnet18\_model{-}\textquotesingle{} + str(e) +\textquotesingle{}.pt\textquotesingle{})}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{def}\NormalTok{ train\_model(model, train\_dl, epochs, display\_every}\OperatorTok{=}\DecValTok{200}\NormalTok{, first\_epoch}\OperatorTok{=}\DecValTok{0}\NormalTok{):}
-\NormalTok{    data\_val }\OperatorTok{=} \BuiltInTok{next}\NormalTok{(}\BuiltInTok{iter}\NormalTok{(val\_dl)) }\CommentTok{\# getting a batch for visualizing the model output after fixed intervals}
-    \ControlFlowTok{for}\NormalTok{ e }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(first\_epoch, epochs):}
-\NormalTok{        loss\_meter\_dict }\OperatorTok{=}\NormalTok{ create\_loss\_meters() }\CommentTok{\# function returing a dictionary of objects to }
-\NormalTok{        i }\OperatorTok{=} \DecValTok{0}                                  \CommentTok{\# log the losses of the complete network}
-        \ControlFlowTok{for}\NormalTok{ data }\KeywordTok{in}\NormalTok{ tqdm(train\_dl):}
-\NormalTok{            model.setup\_input(data) }
-\NormalTok{            model.optimize()}
-\NormalTok{            update\_losses(model, loss\_meter\_dict, count}\OperatorTok{=}\NormalTok{data[}\StringTok{\textquotesingle{}L\textquotesingle{}}\NormalTok{].size(}\DecValTok{0}\NormalTok{)) }\CommentTok{\# function updating the log objects}
-\NormalTok{            i }\OperatorTok{+=} \DecValTok{1}
-            \ControlFlowTok{if}\NormalTok{ i }\OperatorTok{\%}\NormalTok{ display\_every }\OperatorTok{==} \DecValTok{0}\NormalTok{:}
-                \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"}\CharTok{\textbackslash{}n}\SpecialStringTok{Epoch }\SpecialCharTok{\{}\NormalTok{e}\OperatorTok{+}\DecValTok{1}\SpecialCharTok{\}}\SpecialStringTok{/}\SpecialCharTok{\{}\NormalTok{epochs}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
-                \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Iteration }\SpecialCharTok{\{}\NormalTok{i}\SpecialCharTok{\}}\SpecialStringTok{/}\SpecialCharTok{\{}\BuiltInTok{len}\NormalTok{(train\_dl)}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
-\NormalTok{                log\_results(loss\_meter\_dict) }\CommentTok{\# function to print out the losses}
-\NormalTok{                visualize(model, data\_val, save}\OperatorTok{=}\VariableTok{False}\NormalTok{) }\CommentTok{\# function displaying the model\textquotesingle{}s outputs}
-\NormalTok{        torch.save(model.state\_dict(), }\StringTok{\textquotesingle{}models/model6{-}3channel{-}ViT.pt\textquotesingle{}}\NormalTok{)}
-
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{metrics}{%
-\subsubsection{Metrics}\label{metrics}}
-
-To assess the different networks architectures we selected a set of
-metrics for regression models:
-
-\begin{itemize}
-\tightlist
-\item
-  Correlation coeficient \emph{R} squared
-\item
-  Explained variance
-\item
-  Mean absolute error
-\item
-  Median absolute error
-\item
-  Mean squared error
-\end{itemize}
-
-We calculated all these metrics for each one of the \textbf{ab}
-channels.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{from}\NormalTok{ sklearn.metrics }\ImportTok{import}\NormalTok{ r2\_score, explained\_variance\_score, mean\_absolute\_error, mean\_squared\_error, median\_absolute\_error}
-\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
-
-\KeywordTok{def}\NormalTok{ get\_metrics(model, dl):}
-\NormalTok{    test\_iter }\OperatorTok{=} \BuiltInTok{iter}\NormalTok{(dl)}
-\NormalTok{    [fa,fb,ra,rb] }\OperatorTok{=}\NormalTok{ [np.zeros((}\DecValTok{1}\NormalTok{,SIZE}\OperatorTok{**}\DecValTok{2}\NormalTok{))] }\OperatorTok{*} \DecValTok{4}
-
-    \ControlFlowTok{for}\NormalTok{ data }\KeywordTok{in}\NormalTok{ tqdm(test\_iter):}
-\NormalTok{        fake\_imgs, real\_imgs }\OperatorTok{=}\NormalTok{ model\_eval(model, data)}
-\NormalTok{        fab }\OperatorTok{=}\NormalTok{ np.reshape(fake\_imgs[:,...,}\DecValTok{1}\NormalTok{],(fake\_imgs.shape[}\DecValTok{0}\NormalTok{],}\OperatorTok{{-}}\DecValTok{1}\NormalTok{))}
-\NormalTok{        rab }\OperatorTok{=}\NormalTok{ np.reshape(real\_imgs[:,...,}\DecValTok{1}\NormalTok{],(real\_imgs.shape[}\DecValTok{0}\NormalTok{],}\OperatorTok{{-}}\DecValTok{1}\NormalTok{))}
-\NormalTok{        fbb }\OperatorTok{=}\NormalTok{ np.reshape(fake\_imgs[:,...,}\DecValTok{2}\NormalTok{],(fake\_imgs.shape[}\DecValTok{0}\NormalTok{],}\OperatorTok{{-}}\DecValTok{1}\NormalTok{))}
-\NormalTok{        rbb }\OperatorTok{=}\NormalTok{ np.reshape(real\_imgs[:,...,}\DecValTok{2}\NormalTok{],(real\_imgs.shape[}\DecValTok{0}\NormalTok{],}\OperatorTok{{-}}\DecValTok{1}\NormalTok{))}
-\NormalTok{        fa }\OperatorTok{=}\NormalTok{ np.concatenate((fa,fab))}
-\NormalTok{        fb }\OperatorTok{=}\NormalTok{ np.concatenate((fb,fbb))}
-\NormalTok{        ra }\OperatorTok{=}\NormalTok{ np.concatenate((ra,rab))}
-\NormalTok{        rb }\OperatorTok{=}\NormalTok{ np.concatenate((rb,rbb))}
-
-\NormalTok{    table}\OperatorTok{=}\NormalTok{[]}
-\NormalTok{    table.append([}\StringTok{"R{-}square"}\NormalTok{, r2\_score(fa, ra), r2\_score(fb, rb)])}
-\NormalTok{    table.append([}\StringTok{"Explained variance"}\NormalTok{, explained\_variance\_score(fa, ra), explained\_variance\_score(fb, rb)])}
-\NormalTok{    table.append([}\StringTok{"Mean absolute error"}\NormalTok{, mean\_absolute\_error(fa, ra), mean\_absolute\_error(fb, rb)])}
-\NormalTok{    table.append([}\StringTok{"Median absolute error"}\NormalTok{, median\_absolute\_error(fa, ra), median\_absolute\_error(fb, rb)])}
-\NormalTok{    table.append([}\StringTok{"Mean squared error"}\NormalTok{, mean\_squared\_error(fa, ra), mean\_squared\_error(fb, rb)])}
-\NormalTok{    table.append([}\StringTok{"Sample size"}\NormalTok{, fa.shape[}\DecValTok{0}\NormalTok{], fb.shape[}\DecValTok{0}\NormalTok{]])}
-
-\NormalTok{    df }\OperatorTok{=}\NormalTok{ pd.DataFrame(np.array(table),columns }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Metric\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}a{-}channel\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}b{-}channel\textquotesingle{}}\NormalTok{])}
-    \ControlFlowTok{return}\NormalTok{ df}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{first-approach-resnet18-generator}{%
-\subsubsection{\texorpdfstring{First approach: \emph{ResNet18}
-generator}{First approach: ResNet18 generator}}\label{first-approach-resnet18-generator}}
-
-One of the challenges of GANs is that, at the beginning of the training,
-the task of the discriminator is much easier than that of the generator
-because the generated outputs are very different from the real ones. In
-this situation, the discriminator learns so much faster and gives no
-time to the generator to adapt. To avoid this, we gave the generator a
-\emph{head start} by training it alone (without the generator) for 20
-epochs with a L1 loss function and saving its weights.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Pretraining of ResNet18 Generator}
-
-\NormalTok{net\_G }\OperatorTok{=}\NormalTok{ build\_res\_unet(n\_input}\OperatorTok{=}\DecValTok{1}\NormalTok{, n\_output}\OperatorTok{=}\DecValTok{2}\NormalTok{, size}\OperatorTok{=}\DecValTok{256}\NormalTok{)}
-\NormalTok{opt }\OperatorTok{=}\NormalTok{ optim.Adam(net\_G.parameters(), lr}\OperatorTok{=}\FloatTok{1e{-}4}\NormalTok{)}
-\NormalTok{criterion }\OperatorTok{=}\NormalTok{ nn.L1Loss()        }
-\NormalTok{pretrain\_generator(net\_G, train\_dl, opt, criterion, }\DecValTok{20}\NormalTok{)}
-\NormalTok{torch.save(net\_G.state\_dict(), }\StringTok{"models/net\_G\_resnet18\_model{-}19.pt"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-After that we started the parallel training of the generator and the
-patch discriminator for another 20 epochs.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{net\_G }\OperatorTok{=}\NormalTok{ build\_res\_unet(n\_input}\OperatorTok{=}\DecValTok{1}\NormalTok{, n\_output}\OperatorTok{=}\DecValTok{2}\NormalTok{, size}\OperatorTok{=}\DecValTok{256}\NormalTok{)}
-\NormalTok{net\_G.load\_state\_dict(torch.load(}\StringTok{"models/net\_G\_resnet18\_model{-}19.pt"}\NormalTok{, map\_location}\OperatorTok{=}\NormalTok{device))}
-\NormalTok{model }\OperatorTok{=}\NormalTok{ MainModel(net\_G}\OperatorTok{=}\NormalTok{net\_G)}
-\NormalTok{train\_model(model, train\_dl, }\DecValTok{20}\NormalTok{)}
-\NormalTok{torch.save(model.state\_dict(), }\StringTok{"models/colorization2{-}epoch20.pt"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{net\_G }\OperatorTok{=}\NormalTok{ build\_res\_unet(n\_input}\OperatorTok{=}\DecValTok{1}\NormalTok{, n\_output}\OperatorTok{=}\DecValTok{2}\NormalTok{, size}\OperatorTok{=}\DecValTok{224}\NormalTok{)}
-\NormalTok{model }\OperatorTok{=}\NormalTok{ MainModel(net\_G }\OperatorTok{=}\NormalTok{ net\_G)}
-\NormalTok{model.load\_state\_dict(torch.load(}\StringTok{"models/colorization2{-}epoch20.pt"}\NormalTok{, map\_location}\OperatorTok{=}\NormalTok{device))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-model initialized with norm initialization
-
-
-
-
-
-<All keys matched successfully>
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{my\_paths }\OperatorTok{=}\NormalTok{ glob.glob(}\StringTok{"images/*.JPG"}\NormalTok{)}
-\NormalTok{my\_dl }\OperatorTok{=}\NormalTok{ make\_dataloaders(paths}\OperatorTok{=}\NormalTok{my\_paths, split}\OperatorTok{=}\StringTok{\textquotesingle{}val\textquotesingle{}}\NormalTok{,  n\_workers}\OperatorTok{=}\DecValTok{0}\NormalTok{) }
-\NormalTok{my\_iter }\OperatorTok{=} \BuiltInTok{iter}\NormalTok{(my\_dl)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{=} \BuiltInTok{next}\NormalTok{(my\_iter)}
-\NormalTok{fake\_imgs, real\_imgs }\OperatorTok{=}\NormalTok{ visualize(model, data, }\VariableTok{False}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-\centering
-\includegraphics{Project_files/Project_33_0.png}
-\caption{png}
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df }\OperatorTok{=}\NormalTok{ get\_metrics(model, my\_dl)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df.to\_latex(caption}\OperatorTok{=}\NormalTok{(}\StringTok{"ResNet18 metrics on personal photos"}\NormalTok{,}\StringTok{"Metrics of ResNet18 generator on dataset of personal photos"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df }\OperatorTok{=}\NormalTok{ get\_metrics(model, val\_dl)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df.to\_latex(caption}\OperatorTok{=}\NormalTok{(}\StringTok{"ResNet18 metrics on validation dataset"}\NormalTok{,}\StringTok{"Metrics of ResNet18 generator on validation dataset"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{table}\centering\caption[Metrics of ResNet18 generator on validation dataset]{ResNet18 metrics on validation dataset}\begin{tabular}{llll}\toprule{} &                 Metric &              a-channel &             b-channel \\\midrule0 &               R-square &     0.9762806708182279 &    0.7944829539176959 \\1 &     Explained variance &     0.9763600120897222 &    0.8047133044855702 \\2 &    Mean absolute error &   0.022080948550583485 &   0.08126157218579984 \\3 &  Median absolute error &   0.011479740269680015 &  0.053269025524179094 \\4 &     Mean squared error &  0.0016633580971493562 &  0.014459893084060526 \\5 &            Sample size &                   2000 &                  2000 \\\bottomrule\end{tabular}\end{table}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df.to\_pickle(}\StringTok{\textquotesingle{}results/ResNet18onValidation.pkl\textquotesingle{}}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-The results of the model with the ResNet18 generator are acceptable.
-However, many times they do not look natural because of an excessive use
-of colors by the generator that resulted in colorful blotches in the
-pictures.
-
-In agreement with the visual inspection, the resulting metrics on the
-validation dataset showed that the network did a pretty good job at
-predicting the \textbf{a}-channel with over 97\% of the variance of the
-channel predicted by the model with a very low mean squared error.
-However, the prediction on the \textbf{b}-channel was not as good with
-the model predicting only 80\% of its variance.
-
-\hypertarget{second-approach-vit-as-discriminator}{%
-\subsubsection{Second approach: ViT as
-discriminator}\label{second-approach-vit-as-discriminator}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#net\_G = build\_res\_unet(n\_input=1, n\_output=2, size=256)}
-\CommentTok{\#net\_G.load\_state\_dict(torch.load("models/net\_G\_resnet18\_model{-}19.pt", map\_location=device))}
-\CommentTok{\#net\_D = build\_visiontransformer()}
-\CommentTok{\#model = MainModel(net\_G=net\_G, net\_D=net\_D)}
-\CommentTok{\#model.load\_state\_dict(torch.load(\textquotesingle{}models/model2{-}1.pt\textquotesingle{}))}
-\CommentTok{\#train\_model(model, train\_dl, 20, first\_epoch=1)}
-\CommentTok{\#torch.save(net\_G.state\_dict(), "models/colorization3{-}epoch20.pt")}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{net\_G }\OperatorTok{=}\NormalTok{ build\_VTi\_generator()}
-\NormalTok{opt }\OperatorTok{=}\NormalTok{ optim.Adam(net\_G.parameters(), lr}\OperatorTok{=}\FloatTok{1e{-}4}\NormalTok{)}
-\NormalTok{criterion }\OperatorTok{=}\NormalTok{ nn.L1Loss()        }
-\CommentTok{\#pretrain\_generator(net\_G, train\_dl, opt, criterion, 20)}
-\CommentTok{\#torch.save(net\_G.state\_dict(), "models/net\_G\_ViT{-}20{-}pretraining.pt")}
-\NormalTok{net\_G.load\_state\_dict(torch.load(}\StringTok{"models/net\_G\_ViT{-}20{-}pretraining.pt"}\NormalTok{, map\_location}\OperatorTok{=}\NormalTok{device))}
-\NormalTok{model }\OperatorTok{=}\NormalTok{ MainModel(net\_G }\OperatorTok{=}\NormalTok{ net\_G, use\_ViT\_gen}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
-\NormalTok{train\_model(model, train\_dl, }\DecValTok{20}\NormalTok{)}
-\NormalTok{torch.save(net\_G.state\_dict(), }\StringTok{"models/colorization6{-}ViT{-}epoch20.pt"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{net\_G }\OperatorTok{=}\NormalTok{ build\_VTi\_generator()}
-\CommentTok{\#model = MainModel(net\_G = net\_G, use\_ViT\_gen=True)}
-\CommentTok{\#net\_G = build\_res\_unet(n\_input=1, n\_output=2, size=224)}
-\NormalTok{model }\OperatorTok{=}\NormalTok{ MainModel(net\_G }\OperatorTok{=}\NormalTok{ net\_G, use\_ViT\_gen}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
-\CommentTok{\# net\_G.load\_state\_dict(torch.load("res18{-}unet.pt", map\_location=device))}
-\CommentTok{\#model = MainModel(net\_G=net\_G, net\_D = build\_visiontransformer())}
-\NormalTok{net\_G.load\_state\_dict(torch.load(}\StringTok{"models/colorization6{-}ViT{-}epoch20.pt"}\NormalTok{, map\_location}\OperatorTok{=}\NormalTok{device))}
-\NormalTok{test\_paths }\OperatorTok{=}\NormalTok{ glob.glob(}\StringTok{"images/*.JPG"}\NormalTok{)}
-
-\NormalTok{my\_dl }\OperatorTok{=}\NormalTok{ make\_dataloaders(paths}\OperatorTok{=}\NormalTok{test\_paths, split}\OperatorTok{=}\StringTok{\textquotesingle{}val\textquotesingle{}}\NormalTok{,  n\_workers}\OperatorTok{=}\DecValTok{0}\NormalTok{)  }\CommentTok{\#\# n\_workers=0 in Windows}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-Some weights of the model checkpoint at google/vit-base-patch16-224-in21k were not used when initializing ViTForMaskedImageModeling: ['pooler.dense.bias', 'pooler.dense.weight']
-- This IS expected if you are initializing ViTForMaskedImageModeling from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
-- This IS NOT expected if you are initializing ViTForMaskedImageModeling from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-Some weights of ViTForMaskedImageModeling were not initialized from the model checkpoint at google/vit-base-patch16-224-in21k and are newly initialized: ['embeddings.mask_token', 'decoder.0.weight', 'decoder.0.bias']
-You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
-
-
-model initialized with norm initialization
-
-
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\ipykernel_launcher.py:10: DeprecationWarning: BICUBIC is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.BICUBIC instead.
-  # Remove the CWD from sys.path while we load stuff.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df }\OperatorTok{=}\NormalTok{ get\_metrics(model, val\_dl)}
-\NormalTok{df}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-  0%|          | 0/125 [00:00<?, ?it/s]
-
-
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 1 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 2 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 12 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 3 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 100 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 19 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 4 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 37 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 66 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 14 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 8 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 20 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 11 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 9 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 60 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 6 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 5 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 123 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 21 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 45 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 121 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 47 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 10 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 17 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 38 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 16 pixels
-  return func(*args, **kwargs)
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\skimage\_shared\utils.py:394: UserWarning: Color data out of range: Z < 0 in 13 pixels
-  return func(*args, **kwargs)
-\end{verbatim}
-
-Metric
-
-a-channel
-
-b-channel
-
-0
-
-R-square
-
-0.9762806708182279
-
-0.7944829539176959
-
-1
-
-Explained variance
-
-0.9763600120897222
-
-0.8047133044855702
-
-2
-
-Mean absolute error
-
-0.022080948550583485
-
-0.08126157218579984
-
-3
-
-Median absolute error
-
-0.011479740269680015
-
-0.053269025524179094
-
-4
-
-Mean squared error
-
-0.0016633580971493562
-
-0.014459893084060526
-
-5
-
-Sample size
-
-2001
-
-2001
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{test\_iter }\OperatorTok{=} \BuiltInTok{iter}\NormalTok{(my\_dl)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{=} \BuiltInTok{next}\NormalTok{(test\_iter)}
-\NormalTok{fake\_imgs, real\_imgs }\OperatorTok{=}\NormalTok{ visualize(model, data, }\VariableTok{False}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-\centering
-\includegraphics{Project_files/Project_48_0.png}
-\caption{png}
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{def}\NormalTok{ write\_image(image:np.ndarray, image\_path: }\BuiltInTok{str}\NormalTok{):}
-    \CommentTok{\textquotesingle{}\textquotesingle{}\textquotesingle{}}
-\CommentTok{    Writes image from image path}
-\CommentTok{    Args:}
-\CommentTok{        image: RGB image of shape H x W x C, with float32 data}
-\CommentTok{        image\_path: path to image}
-
-\CommentTok{    Returns:}
-\CommentTok{        RGB image of shape H x W x 3 in floating point format}
-\CommentTok{    \textquotesingle{}\textquotesingle{}\textquotesingle{}}
-    \CommentTok{\# read image and convert to RGB}
-\NormalTok{    bgr\_image }\OperatorTok{=}\NormalTok{ (image[:, :, [}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{]] ).astype(np.uint8)}
-\NormalTok{    cv2.imwrite(image\_path, bgr\_image)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{def}\NormalTok{ rescale\_img\_with\_colors (grayscale, pred):}
-    
-\NormalTok{    h,w }\OperatorTok{=}\NormalTok{ grayscale.shape}
-\NormalTok{    f }\OperatorTok{=}\NormalTok{ cv2.resize(pred, (w,h))}
-\NormalTok{    f }\OperatorTok{=}\NormalTok{ cv2.cvtColor(f, cv2.COLOR\_RGB2LAB)}
-\NormalTok{    grayscale }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{abs}\NormalTok{(grayscale}\OperatorTok{*}\FloatTok{0.4}\NormalTok{).astype(}\StringTok{\textquotesingle{}uint8\textquotesingle{}}\NormalTok{)}
-\NormalTok{    new  }\OperatorTok{=}\NormalTok{ np.stack((grayscale, f[...,}\DecValTok{1}\NormalTok{], f[...,}\DecValTok{2}\NormalTok{]), axis}\OperatorTok{={-}}\DecValTok{1}\NormalTok{)}
-\NormalTok{    new }\OperatorTok{=}\NormalTok{ cv2.cvtColor(new, cv2.COLOR\_LAB2RGB) }\OperatorTok{*} \FloatTok{255.}
-    \ControlFlowTok{return}\NormalTok{ new.astype(}\StringTok{\textquotesingle{}uint8\textquotesingle{}}\NormalTok{)}
-    
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{test\_paths }\OperatorTok{=}\NormalTok{ glob.glob(}\StringTok{"portraits/*.JPG"}\NormalTok{)}
-\NormalTok{my\_dl }\OperatorTok{=}\NormalTok{ make\_dataloaders(paths}\OperatorTok{=}\NormalTok{test\_paths, split}\OperatorTok{=}\StringTok{\textquotesingle{}val\textquotesingle{}}\NormalTok{,  n\_workers}\OperatorTok{=}\DecValTok{0}\NormalTok{) }
-\NormalTok{my\_iter }\OperatorTok{=} \BuiltInTok{iter}\NormalTok{(my\_dl)}
-\NormalTok{i }\OperatorTok{=} \DecValTok{0}
-\ControlFlowTok{for}\NormalTok{ data }\KeywordTok{in}\NormalTok{ tqdm(my\_iter):}
-\NormalTok{    fake\_imgs, real\_imgs }\OperatorTok{=}\NormalTok{ model\_eval(model, data)}
-    \ControlFlowTok{for}\NormalTok{ fimg }\KeywordTok{in}\NormalTok{ fake\_imgs:}
-\NormalTok{        imagefn }\OperatorTok{=}\NormalTok{ test\_paths[i]}
-\NormalTok{        i }\OperatorTok{+=} \DecValTok{1}
-\NormalTok{        original }\OperatorTok{=}\NormalTok{ cv2.imread(imagefn, cv2.IMREAD\_GRAYSCALE)}
-\NormalTok{        color }\OperatorTok{=}\NormalTok{ rescale\_img\_with\_colors(original, fimg)}
-\NormalTok{        write\_image(color, }\StringTok{"results/"}\OperatorTok{+}\NormalTok{imagefn)}
-\NormalTok{        fig, axes }\OperatorTok{=}\NormalTok{ plt.subplots(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{15}\NormalTok{,}\DecValTok{15}\NormalTok{))}
-\NormalTok{        axes[}\DecValTok{0}\NormalTok{].imshow(original, cmap}\OperatorTok{=}\StringTok{\textquotesingle{}gray\textquotesingle{}}\NormalTok{)}
-\NormalTok{        axes[}\DecValTok{1}\NormalTok{].imshow(fimg)}
-\NormalTok{        axes[}\DecValTok{2}\NormalTok{].imshow(color)}
-\NormalTok{        plt.show()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-c:\users\fnoya\appdata\local\programs\python\python37\lib\site-packages\ipykernel_launcher.py:10: DeprecationWarning: BICUBIC is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.BICUBIC instead.
-  # Remove the CWD from sys.path while we load stuff.
-
-
-
-  0%|          | 0/1 [00:00<?, ?it/s]
-\end{verbatim}
-
-\begin{figure}
-\centering
-\includegraphics{Project_files/Project_51_2.png}
-\caption{png}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{Project_files/Project_51_3.png}
-\caption{png}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{Project_files/Project_51_4.png}
-\caption{png}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{Project_files/Project_51_5.png}
-\caption{png}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{Project_files/Project_51_6.png}
-\caption{png}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{Project_files/Project_51_7.png}
-\caption{png}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{Project_files/Project_51_8.png}
-\caption{png}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{Project_files/Project_51_9.png}
-\caption{png}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{Project_files/Project_51_10.png}
-\caption{png}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{Project_files/Project_51_11.png}
-\caption{png}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{Project_files/Project_51_12.png}
-\caption{png}
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\OperatorTok{\%}\NormalTok{matplotlib notebook}
-\CommentTok{\#\%matplotlib widget}
-
-\NormalTok{mask\_coords }\OperatorTok{=}\NormalTok{ utils.specify\_mask(img)}
-\OperatorTok{\%}\NormalTok{matplotlib inline }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-If it doesn't get you to the drawing mode, then rerun this function again.
-
-
-
-<IPython.core.display.Javascript object>
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{xs }\OperatorTok{=}\NormalTok{ mask\_coords[}\DecValTok{0}\NormalTok{]}
-\NormalTok{ys }\OperatorTok{=}\NormalTok{ mask\_coords[}\DecValTok{1}\NormalTok{]}
-\OperatorTok{\%}\NormalTok{matplotlib inline}
+\ImportTok{from}\NormalTok{ torchvision }\ImportTok{import}\NormalTok{ models}
+\ImportTok{import}\NormalTok{ torchvision.transforms }\ImportTok{as}\NormalTok{ T}
+\ImportTok{import}\NormalTok{ torch}
+\ImportTok{import}\NormalTok{ cv2}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{from}\NormalTok{ PIL }\ImportTok{import}\NormalTok{ Image}
 \ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
-\NormalTok{plt.figure()}
-\NormalTok{fg\_mask }\OperatorTok{=}\NormalTok{ utils.get\_mask(ys, xs, img)}
+
+\NormalTok{dlv3 }\OperatorTok{=}\NormalTok{ models.segmentation.deeplabv3\_resnet101(pretrained}\OperatorTok{=}\DecValTok{1}\NormalTok{).}\BuiltInTok{eval}\NormalTok{()}
+\NormalTok{n\_classes }\OperatorTok{=} \DecValTok{21} 
+\NormalTok{palette }\OperatorTok{=}\NormalTok{ torch.tensor([}\DecValTok{2} \OperatorTok{**} \DecValTok{25} \OperatorTok{{-}} \DecValTok{1}\NormalTok{, }\DecValTok{2} \OperatorTok{**} \DecValTok{15} \OperatorTok{{-}} \DecValTok{1}\NormalTok{, }\DecValTok{2} \OperatorTok{**} \DecValTok{21} \OperatorTok{{-}} \DecValTok{1}\NormalTok{])}
+\NormalTok{colors }\OperatorTok{=}\NormalTok{ torch.as\_tensor([i }\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(n\_classes)])[:, }\VariableTok{None}\NormalTok{] }\OperatorTok{*}\NormalTok{ palette}
+
+\NormalTok{grayscale\_images }\OperatorTok{=}\NormalTok{ (}
+\NormalTok{    imgs\_grayscale\_1,}
+\NormalTok{    imgs\_grayscale\_2,}
+\NormalTok{    imgs\_grayscale\_3,}
+\NormalTok{    imgs\_grayscale\_4,}
+\NormalTok{    imgs\_grayscale\_5,}
+\NormalTok{    imgs\_grayscale\_6,}
+\NormalTok{    imgs\_grayscale\_7,}
+\NormalTok{    imgs\_grayscale\_8,}
+\NormalTok{)}
+
+
+\NormalTok{colorized\_images }\OperatorTok{=}\NormalTok{ (}
+\NormalTok{    imgs\_color\_1,}
+\NormalTok{    imgs\_color\_2,}
+\NormalTok{    imgs\_color\_3,}
+\NormalTok{    imgs\_color\_4,}
+\NormalTok{    imgs\_color\_5,}
+\NormalTok{    imgs\_color\_6,}
+\NormalTok{    imgs\_color\_7,}
+\NormalTok{    imgs\_color\_8,}
+\NormalTok{)}
+
+\KeywordTok{def}\NormalTok{ infer\_segment\_color(img):}
+\NormalTok{  [r,g,b] }\OperatorTok{=} \DecValTok{3} \OperatorTok{*}\NormalTok{ [np.zeros\_like(img).astype(np.uint8)]}
+  \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(n\_classes):}
+\NormalTok{    idx }\OperatorTok{=}\NormalTok{ (img }\OperatorTok{==}\NormalTok{ i)}
+\NormalTok{    r[idx],  g[idx],  b[idx] }\OperatorTok{=}\NormalTok{  colors[i, }\DecValTok{0}\NormalTok{],  colors[i, }\DecValTok{1}\NormalTok{], colors[i, }\DecValTok{2}\NormalTok{]}
+\NormalTok{  rgb }\OperatorTok{=}\NormalTok{ np.stack([r, g, b], axis}\OperatorTok{=}\DecValTok{2}\NormalTok{)}
+  \ControlFlowTok{return}\NormalTok{ rgb}
+
+\KeywordTok{def}\NormalTok{ generate\_mask(img):}
+\NormalTok{  transform }\OperatorTok{=}\NormalTok{ T.Compose([}
+\NormalTok{                     T.ToTensor(),}
+\NormalTok{                     T.Normalize(mean }\OperatorTok{=}\NormalTok{ [}\FloatTok{0.485}\NormalTok{, }\FloatTok{0.456}\NormalTok{, }\FloatTok{0.406}\NormalTok{],  std }\OperatorTok{=}\NormalTok{ [}\FloatTok{0.229}\NormalTok{, }\FloatTok{0.224}\NormalTok{, }\FloatTok{0.225}\NormalTok{])])}
+\NormalTok{  output }\OperatorTok{=}\NormalTok{ dlv3(transform(img).unsqueeze(}\DecValTok{0}\NormalTok{))[}\StringTok{\textquotesingle{}out\textquotesingle{}}\NormalTok{]}
+\NormalTok{  mask }\OperatorTok{=}\NormalTok{ torch.argmax(output.squeeze(), dim}\OperatorTok{=}\DecValTok{0}\NormalTok{).detach().cpu().numpy()}
+\NormalTok{  mask }\OperatorTok{=}\NormalTok{ infer\_segment\_color(mask)}
+  \BuiltInTok{print}\NormalTok{(}\StringTok{"Mask shape"}\NormalTok{, mask.shape)}
+  \ControlFlowTok{return}\NormalTok{ mask}
+
+\NormalTok{masks }\OperatorTok{=}\NormalTok{ \{\} }
+\NormalTok{masks[}\DecValTok{0}\NormalTok{] }\OperatorTok{=}\NormalTok{ generate\_mask(imgs\_grayscale\_1)}
+\NormalTok{masks[}\DecValTok{1}\NormalTok{] }\OperatorTok{=}\NormalTok{ generate\_mask(imgs\_grayscale\_2)}
+\NormalTok{masks[}\DecValTok{2}\NormalTok{] }\OperatorTok{=}\NormalTok{ generate\_mask(imgs\_grayscale\_3)}
+\NormalTok{masks[}\DecValTok{3}\NormalTok{] }\OperatorTok{=}\NormalTok{ generate\_mask(imgs\_grayscale\_4)}
+\NormalTok{masks[}\DecValTok{4}\NormalTok{] }\OperatorTok{=}\NormalTok{ generate\_mask(imgs\_grayscale\_5)}
+\NormalTok{masks[}\DecValTok{5}\NormalTok{] }\OperatorTok{=}\NormalTok{ generate\_mask(imgs\_grayscale\_6)}
+\NormalTok{masks[}\DecValTok{6}\NormalTok{] }\OperatorTok{=}\NormalTok{ generate\_mask(imgs\_grayscale\_7)}
+\NormalTok{masks[}\DecValTok{7}\NormalTok{] }\OperatorTok{=}\NormalTok{ generate\_mask(imgs\_grayscale\_8)}
+
+\NormalTok{\_masks }\OperatorTok{=}\NormalTok{ []}
+\NormalTok{\_reverse\_masks }\OperatorTok{=}\NormalTok{ []}
+\NormalTok{blended\_images }\OperatorTok{=}\NormalTok{ []}
+
+\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\BuiltInTok{len}\NormalTok{(masks)):}
+\NormalTok{    \_mask }\OperatorTok{=}\NormalTok{ ((masks[i] }\OperatorTok{!=} \DecValTok{0}\NormalTok{).astype(}\BuiltInTok{int}\NormalTok{))}
+\NormalTok{    \_masks.append(\_mask)}
+\NormalTok{    \_rev\_mask }\OperatorTok{=}\NormalTok{  ( (masks[i] }\OperatorTok{==} \DecValTok{0}\NormalTok{).astype(}\BuiltInTok{int}\NormalTok{))}
+\NormalTok{    \_reverse\_masks.append(\_rev\_mask)}
+\NormalTok{    blended\_images.append(\_mask }\OperatorTok{*}\NormalTok{ colorized\_images[i] }\OperatorTok{+}\NormalTok{ \_rev\_mask }\OperatorTok{*}\NormalTok{ grayscale\_images[i])}
+    
+\KeywordTok{def}\NormalTok{ show\_images(im\_grayscale, im\_colorized, im\_mask, im\_blended):}
+\NormalTok{    fig, axes }\OperatorTok{=}\NormalTok{ plt.subplots(}\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{20}\NormalTok{,}\DecValTok{20}\NormalTok{))}
+\NormalTok{    axes[}\DecValTok{0}\NormalTok{].imshow(im\_grayscale, cmap}\OperatorTok{=}\StringTok{\textquotesingle{}gray\textquotesingle{}}\NormalTok{)}
+\NormalTok{    axes[}\DecValTok{0}\NormalTok{].set\_title(}\StringTok{\textquotesingle{}Grayscale image\textquotesingle{}}\NormalTok{), axes[}\DecValTok{0}\NormalTok{].set\_xticks([]), axes[}\DecValTok{0}\NormalTok{].set\_yticks([])}
+\NormalTok{    axes[}\DecValTok{1}\NormalTok{].imshow(im\_colorized,cmap}\OperatorTok{=}\StringTok{\textquotesingle{}gray\textquotesingle{}}\NormalTok{)}
+\NormalTok{    axes[}\DecValTok{1}\NormalTok{].set\_title(}\StringTok{\textquotesingle{}Colorized image\textquotesingle{}}\NormalTok{), axes[}\DecValTok{1}\NormalTok{].set\_xticks([]), axes[}\DecValTok{1}\NormalTok{].set\_yticks([])}\OperatorTok{;}
+\NormalTok{    axes[}\DecValTok{2}\NormalTok{].imshow(im\_mask }\OperatorTok{*} \DecValTok{255}\NormalTok{,cmap}\OperatorTok{=}\StringTok{\textquotesingle{}gray\textquotesingle{}}\NormalTok{)}
+\NormalTok{    axes[}\DecValTok{2}\NormalTok{].set\_title(}\StringTok{\textquotesingle{}Mask\textquotesingle{}}\NormalTok{), axes[}\DecValTok{2}\NormalTok{].set\_xticks([]), axes[}\DecValTok{2}\NormalTok{].set\_yticks([])}\OperatorTok{;}
+\NormalTok{    axes[}\DecValTok{3}\NormalTok{].imshow(im\_blended ,cmap}\OperatorTok{=}\StringTok{\textquotesingle{}gray\textquotesingle{}}\NormalTok{)}
+\NormalTok{    axes[}\DecValTok{3}\NormalTok{].set\_title(}\StringTok{\textquotesingle{}Blended\textquotesingle{}}\NormalTok{), axes[}\DecValTok{3}\NormalTok{].set\_xticks([]), axes[}\DecValTok{3}\NormalTok{].set\_yticks([])}\OperatorTok{;}
+
+\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\BuiltInTok{len}\NormalTok{(grayscale\_images)): }
+\NormalTok{    show\_images(grayscale\_images[i], colorized\_images[i], \_masks[i], blended\_images[i])}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
----------------------------------------------------------------------------
-
-ValueError                                Traceback (most recent call last)
-
-<ipython-input-21-bb4a2f9fbf03> in <module>
-      4 import matplotlib.pyplot as plt
-      5 plt.figure()
-----> 6 fg_mask = utils.get_mask(ys, xs, img)
-
-
-~/SageMaker/CS445-Colorization-Project/utils.py in get_mask(ys, xs, img)
-    115 
-    116 def get_mask(ys, xs, img):
---> 117     mask = poly2mask(ys, xs, img.shape[:2]).astype(int)
-    118     fig = plt.figure()
-    119     plt.imshow(mask, cmap='gray')
-
-
-~/SageMaker/CS445-Colorization-Project/utils.py in poly2mask(vertex_row_coords, vertex_col_coords, shape)
-      4 
-      5 def poly2mask(vertex_row_coords, vertex_col_coords, shape):
-----> 6     fill_row_coords, fill_col_coords = draw.polygon(vertex_row_coords, vertex_col_coords, shape)
-      7     mask = np.zeros(shape, dtype=np.bool)
-      8     mask[fill_row_coords, fill_col_coords] = True
-
-
-~/anaconda3/envs/mxnet_latest_p37/lib/python3.7/site-packages/skimage/draw/draw.py in polygon(r, c, shape)
-    497 
-    498     """
---> 499     return _polygon(r, c, shape)
-    500 
-    501 
-
-
-skimage/draw/_draw.pyx in skimage.draw._draw._polygon()
-
-
-~/anaconda3/envs/mxnet_latest_p37/lib/python3.7/site-packages/numpy/core/_methods.py in _amin(a, axis, out, keepdims, initial, where)
-     32 def _amin(a, axis=None, out=None, keepdims=False,
-     33           initial=_NoValue, where=True):
----> 34     return umr_minimum(a, axis, None, out, keepdims, initial, where)
-     35 
-     36 def _sum(a, axis=None, dtype=None, out=None, keepdims=False,
-
-
-ValueError: zero-size array to reduction operation minimum which has no identity
-
-
-
-<Figure size 640x480 with 0 Axes>
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{fgModel }\OperatorTok{=}\NormalTok{ np.zeros((}\DecValTok{1}\NormalTok{, }\DecValTok{65}\NormalTok{), dtype}\OperatorTok{=}\StringTok{"float"}\NormalTok{)}
-\NormalTok{bgModel }\OperatorTok{=}\NormalTok{ np.zeros((}\DecValTok{1}\NormalTok{, }\DecValTok{65}\NormalTok{), dtype}\OperatorTok{=}\StringTok{"float"}\NormalTok{)}
-\NormalTok{fg\_mask[fg\_mask}\OperatorTok{==}\DecValTok{1}\NormalTok{] }\OperatorTok{=}\NormalTok{ cv2.GC\_PR\_FGD}
-\NormalTok{img }\OperatorTok{=}\NormalTok{ np.uint8(img}\OperatorTok{*}\DecValTok{255}\NormalTok{)}
-\NormalTok{fg\_mask }\OperatorTok{=}\NormalTok{ np.uint8(fg\_mask)}
-\NormalTok{(mask, bgModel, fgModel) }\OperatorTok{=}\NormalTok{ cv2.grabCut(img, fg\_mask, }\VariableTok{None}\NormalTok{, bgModel, }\OperatorTok{\textbackslash{}}
-\NormalTok{                                       fgModel, iterCount}\OperatorTok{=}\DecValTok{5}\NormalTok{, mode}\OperatorTok{=}\NormalTok{cv2.GC\_INIT\_WITH\_MASK)}
-
-\NormalTok{mask }\OperatorTok{=}\NormalTok{ np.where((mask}\OperatorTok{==}\DecValTok{2}\NormalTok{)}\OperatorTok{|}\NormalTok{(mask}\OperatorTok{==}\DecValTok{0}\NormalTok{),}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{).astype(}\StringTok{\textquotesingle{}uint8\textquotesingle{}}\NormalTok{)}
-\NormalTok{fg\_img }\OperatorTok{=}\NormalTok{ img}\OperatorTok{*}\NormalTok{mask[:,:,np.newaxis]}
-\NormalTok{plt.imshow(fg\_img),plt.colorbar(),plt.show()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{img\_gray }\OperatorTok{=}\NormalTok{ cv2.cvtColor(cv2.cvtColor(img, cv2.COLOR\_RGB2GRAY), cv2.COLOR\_GRAY2RGB) }
-\NormalTok{mask }\OperatorTok{=}\NormalTok{ mask[:,:,np.newaxis]}
-\NormalTok{final\_img }\OperatorTok{=}\NormalTok{ img\_gray }\OperatorTok{*}\NormalTok{ (}\DecValTok{1} \OperatorTok{{-}}\NormalTok{ mask) }\OperatorTok{+}\NormalTok{ fg\_img }\OperatorTok{*}\NormalTok{ mask}
-\NormalTok{plt.imshow(final\_img),plt.show()}
-\end{Highlighting}
-\end{Shaded}
-
-\#\# References
-
-\begin{itemize}
-\tightlist
-\item
-  https://pyimagesearch.com/2020/07/27/opencv-grabcut-foreground-segmentation-and-extraction/
-\item
-  https://docs.opencv.org/3.4/d8/d83/tutorial\_py\_grabcut.html
-\item
-  https://towardsdatascience.com/colorizing-black-white-images-with-u-net-and-conditional-gan-a-tutorial-81b2df111cd8
-\item
-  https://doi.org/10.48550/arXiv.2106.06321
-\item
-  https://machinelearningmastery.com/generative-adversarial-network-loss-functions/
-\item
-  https://arxiv.org/abs/1711.10337 Are GANs Created Equal? A Large-Scale
-  Study, 2018.
-\item
-  https://arxiv.org/abs/1406.2661 Generative Adversarial Networks
-\item
-  https://arxiv.org/pdf/1704.00028.pdf Improved Training of Wasserstein
-  GANs
-\item
-  https://arxiv.org/abs/1611.04076 Least Squares Generative Adversarial
-  Networks
-\end{itemize}
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\clearpage
+\hypertarget{references}{%
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-7913730}{}}%
+Chen, L.-C., Papandreou, G., Kokkinos, I., Murphy, K., \& Yuille, A. L.
+(2018). DeepLab: Semantic image segmentation with deep convolutional
+nets, atrous convolution, and fully connected CRFs. \emph{IEEE
+Transactions on Pattern Analysis and Machine Intelligence},
+\emph{40}(4), 834--848. \url{https://doi.org/10.1109/TPAMI.2017.2699184}
+
+\leavevmode\vadjust pre{\hypertarget{ref-chen2017rethinking}{}}%
+Chen, L.-C., Papandreou, G., Schroff, F., \& Adam, H. (2017). Rethinking
+atrous convolution for semantic image segmentation. \emph{arXiv Preprint
+arXiv:1706.05587}.
+
 \leavevmode\vadjust pre{\hypertarget{ref-colorizationtutorial}{}}%
 \emph{Colorizing black \& white images with u-net and conditional GAN
 --- a tutorial}. (n.d.).
@@ -1382,11 +901,23 @@ Hays, J., Perona, P., Ramanan, D., Dollár, P., \& Zitnick, C. L. (2014).
 Microsoft {COCO:} Common objects in context. \emph{CoRR},
 \emph{abs/1405.0312}. \url{http://arxiv.org/abs/1405.0312}
 
+\leavevmode\vadjust pre{\hypertarget{ref-LSGAN}{}}%
+Mao, X., Li, Q., Xie, H., Lau, R. Y. K., \& Wang, Z. (2016). Multi-class
+generative adversarial networks with the {L2} loss function.
+\emph{CoRR}, \emph{abs/1611.04076}.
+\url{http://arxiv.org/abs/1611.04076}
+
 \leavevmode\vadjust pre{\hypertarget{ref-transformers}{}}%
 Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez,
 A. N., Kaiser, L., \& Polosukhin, I. (2017). Attention is all you need.
 \emph{CoRR}, \emph{abs/1706.03762}.
 \url{http://arxiv.org/abs/1706.03762}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Zhenda2021}{}}%
+Xie, Z., Zhang, Z., Cao, Y., Lin, Y., Bao, J., Yao, Z., Dai, Q., \& Hu,
+H. (2021). SimMIM: {A} simple framework for masked image modeling.
+\emph{CoRR}, \emph{abs/2111.09886}.
+\url{https://arxiv.org/abs/2111.09886}
 
 \leavevmode\vadjust pre{\hypertarget{ref-ZhangIE16}{}}%
 Zhang, R., Isola, P., \& Efros, A. A. (2016). Colorful image
