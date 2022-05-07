@@ -166,19 +166,19 @@ We tested our ViT-LSGAN with historic black and white urban pictures as well as 
 After colorizing the images, we segmented the foreground from the background using the DeepLabv3 network. To obtain the final images we blended the colorized foreground with the original black and white background.
 
 
-![Recolorization and segmentation example 1.](deeplabv3_segmentation_files/deeplabv3_segmentation_10_0.png)
+![Recolorization and segmentation example 1.](report_images/segment-blend-result-7.png)
     
-![Recolorization and segmentation example 2.](deeplabv3_segmentation_files/deeplabv3_segmentation_10_1.png)
+![Recolorization and segmentation example 2.](report_images/segment-blend-result-6.png)
     
-![Recolorization and segmentation example 3.](deeplabv3_segmentation_files/deeplabv3_segmentation_10_2.png)
+![Recolorization and segmentation example 3.](report_images/segment-blend-result-5.png)
    
-![Recolorization and segmentation example 4.](deeplabv3_segmentation_files/deeplabv3_segmentation_10_3.png)
+![Recolorization and segmentation example 4.](report_images/segment-blend-result-4.png)
     
-![Recolorization and segmentation example 5.](deeplabv3_segmentation_files/deeplabv3_segmentation_10_4.png)
+![Recolorization and segmentation example 5.](report_images/segment-blend-result-3.png)
     
-![Recolorization and segmentation example 6.](deeplabv3_segmentation_files/deeplabv3_segmentation_10_5.png)
+![Recolorization and segmentation example 6.](report_images/segment-blend-result-2.png)
     
-![Recolorization and segmentation example 7.](deeplabv3_segmentation_files/deeplabv3_segmentation_10_7.png)
+![Recolorization and segmentation example 7.](report_images/segment-blend-result-1.png)
 
 ___
 # Supplemental Materials 
